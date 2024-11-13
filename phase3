@@ -66,8 +66,8 @@ create table Staff (
 create table Dependents (
     SSN VARCHAR(11) NOT NULL,
     Dep_Name VARCHAR(50) NOT NULL,
-    Relationship VARCHAR(20),
-    Sex CHAR(1) CHECK (Sex IN ('M', 'F')),
+    Relationship VARCHAR(20) NOT NULL,
+    Sex CHAR(1) NOT NULL CHECK (Sex IN ('M', 'F')),
 
     CONSTRAINT pk_Dependents PRIMARY KEY (SSN, Dep_Name),
     CONSTRAINT fk_Dependents FOREIGN KEY (SSN) REFERENCES Staff(SSN)
@@ -102,7 +102,7 @@ create table Items (
     Supp_Name VARCHAR(50),
     Supp_Address TEXT,
     Qty_Supplied INTEGER NOT NULL CHECK (Qty_Supplied >= 0),
-    Date_Supplied DATE,
+    Date_Supplied DATE NOT NULL,
 
     CONSTRAINT pk_Items PRIMARY KEY (Barcode),
     CONSTRAINT fk_Items FOREIGN KEY (Supp_Name) REFERENCES Supplier(Name)
