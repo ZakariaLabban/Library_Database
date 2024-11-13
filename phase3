@@ -19,11 +19,14 @@ create table Customer (
     Sex CHAR(1) NOT NULL CHECK (Sex IN ('M', 'F')),
     First_Name VARCHAR(20) NOT NULL,
     Last_Name VARCHAR(20) NOT NULL,
-    Email VARCHAR(50) NOT NULL UNIQUE,
+    Email VARCHAR(50) UNIQUE,
     
     CONSTRAINT pk_Customer PRIMARY KEY (Username),
-    CONSTRAINT fk_Customer FOREIGN KEY (Email) REFERENCES Authentication_System(Email),
+    CONSTRAINT fk_Customer FOREIGN KEY (Email) REFERENCES Authentication_System(Email)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
     CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~  '^[0-9]{2}/[0-9]{6}$' )
+    
 );
 create table Library (
     BranchID VARCHAR(10) NOT NULL,
@@ -49,9 +52,15 @@ create table Staff (
     Hours INTEGER CHECK (Hours >= 0),
 
     CONSTRAINT pk_Staff PRIMARY KEY (SSN),
-    CONSTRAINT fk_Staff FOREIGN KEY (St_Email) REFERENCES Authentication_System(Email),
-    CONSTRAINT fk_Staff FOREIGN KEY (BranchID) REFERENCES Library(BranchID),
+    CONSTRAINT fk_Staff FOREIGN KEY (St_Email) REFERENCES Authentication_System(Email)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
+    CONSTRAINT fk_Staff FOREIGN KEY (BranchID) REFERENCES Library(BranchID)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
     CONSTRAINT fk_Staff FOREIGN KEY (Super_SSN) REFERENCES Staff(SSN)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
 
 );
 create table Dependents (
@@ -62,6 +71,8 @@ create table Dependents (
 
     CONSTRAINT pk_Dependents PRIMARY KEY (SSN, Dep_Name),
     CONSTRAINT fk_Dependents FOREIGN KEY (SSN) REFERENCES Staff(SSN)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 
 );
 create table Supplier (
@@ -86,15 +97,17 @@ create table Items (
     Barcode VARCHAR(20) NOT NULL,
     Name VARCHAR(50) NOT NULL,
     Age_Group VARCHAR(10),
-    Price NUMERIC CHECK (Price > 0),
+    Price NUMERIC NOT NULL CHECK (Price > 0),
     Genre VARCHAR(50),
     Supp_Name VARCHAR(50),
     Supp_Address TEXT,
-    Qty_Supplied INTEGER CHECK (Qty_Supplied >= 0),
+    Qty_Supplied INTEGER NOT NULL CHECK (Qty_Supplied >= 0),
     Date_Supplied DATE,
 
     CONSTRAINT pk_Items PRIMARY KEY (Barcode),
     CONSTRAINT fk_Items FOREIGN KEY (Supp_Name) REFERENCES Supplier(Name)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 create table Books_for_Sale (
 
