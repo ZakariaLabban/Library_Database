@@ -107,7 +107,7 @@ create table Items (
     CONSTRAINT pk_Items PRIMARY KEY (Barcode),
     CONSTRAINT fk_Items FOREIGN KEY (Supp_Name) REFERENCES Supplier(Name)
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE SET NULL
 );
 create table Books_for_Sale (
 
