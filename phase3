@@ -1,1 +1,82 @@
+# we have 18 tables to create and insert date
+CREATE TABLE Authentication_System (
+    email VARCHAR(50),
+    passcode VARCHAR(20) NOT NULL,
+    CONSTRAINT pk_Authentication_System PRIMARY KEY (email),
+    CONSTRAINT chk_email CHECK (
+        email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+    ),
+    CONSTRAINT chk_passcode CHECK (                                          
+        passcode ~ '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{1,}$'
+    )
+    #the passcode must contain at least one upper and lower case and 1 number and 1 symbol
+    #the email should follow the standard format
+);
+create table Customer (
+    Username VARCHAR(20),
+    Phone_Number VARCHAR(10) NOT NULL,
+    Address TEXT,
+    Sex CHAR(1) NOT NULL CHECK (Sex IN ('M', 'F')),
+    First_Name VARCHAR(20) NOT NULL,
+    Last_Name VARCHAR(20) NOT NULL,
+    Email VARCHAR(50) NOT NULL UNIQUE,
+    
+    CONSTRAINT pk_Customer PRIMARY KEY (Username),
+    CONSTRAINT fk_Customer FOREIGN KEY (Email) REFERENCES Authentication_System(Email),
+    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~  '^[0-9]{2}/[0-9]{6}$' )
+);
+create table Library (
+    BranchID VARCHAR(10) NOT NULL,
+    Address TEXT NOT NULL,
+    Phone_Number VARCHAR(10) NOT NULL UNIQUE,
 
+    CONSTRAINT pk_Library PRIMARY KEY (BranchID),
+    CONSTRAINT chk_BranchID CHECK (BranchID ~ '^LIBTECH[0-9]{2}$'),
+    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~ '^[0-9]{2}/[0-9]{6}$')
+);
+create table Staff (
+
+);
+create table Dependents (
+
+);
+create table Supplier (
+
+);
+create table Publisher (
+
+);
+
+create table Items (
+
+);
+create table Books_for_Sale (
+
+);
+create table Books_for_Rent (
+
+);
+create table Authors_BookSale (
+
+);
+create table Authors_BookRent (
+
+);
+create table Stores_Items (
+
+);
+create table Stores_Booksforsale (
+
+);
+create table Buys_Books (
+
+);
+create table Purchases_Items (
+
+);
+create table Borrows (
+
+);
+create table Sale_to_Rent (
+
+);
