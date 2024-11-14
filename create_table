@@ -94,7 +94,7 @@ create table Publisher (
 );
 
 create table Items (
-    Barcode VARCHAR(20) NOT NULL,
+    Barcode VARCHAR(16) NOT NULL,
     Items_Name VARCHAR(50) NOT NULL,
     Age_Group VARCHAR(10),
     Price NUMERIC NOT NULL CHECK (Price > 0),
@@ -174,7 +174,7 @@ CREATE TABLE Authors_BookRent (
 
 CREATE TABLE Stores_Items (
     BranchID VARCHAR(10) NOT NULL,  
-    Barcode VARCHAR(20) NOT NULL,  
+    Barcode VARCHAR(16) NOT NULL,  
     Qty_Stored INT NOT NULL CHECK (Qty_Stored >= 0),  
 
     CONSTRAINT pk_Stores_Items PRIMARY KEY (BranchID, Barcode),
