@@ -81,7 +81,7 @@ INSERT INTO Supplier (Supp_Name, Address, Phone_Number) VALUES
     ('ReadPlus', 'Zahle', '09623657');
 
 
-INSERT INTO Items (Barcode, Name, Age_Group, Price, Genre, Supp_Name, Supp_Address, Qty, Date)
+INSERT INTO Items (Barcode, Items_Name, Age_Group, Price, Genre, Supp_Name, Supp_Address, Qty_Supplied, Date_Supplied)
 VALUES
 (10001, 'Puzzle', '5-12', 50.00, 'Toys', 'JoueClub', 'Beirut', 100, '2024-10-20'),
 (20198, 'Maped Pencil', NULL, 2.50, 'Stationery', 'Maped', 'Beirut', 250, '2024-10-10'),
