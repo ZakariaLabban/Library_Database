@@ -1,1 +1,24 @@
+INSERT INTO Authentication_System (Email, Passcode) VALUES
+    ('elias.nasr@gmail.com', 'Nasr321#'),
+    ('elie.salameh@gmail.com', 'passElie56&'),
+    ('fouad.maalouf@gmail.com', 'Fouadex231%'),
+    ('georges.hareb@gmail.com', 'Passgeorges45'),
+    ('jad.barakat@gmail.com', 'Passjadbarakatt2'),
+    ('joelle.fares@gmail.com', 'Jojo9024%'),
+    ('nadine.mabsout@gmail.com', 'Nadoumemabsout#@'),
+    ('nour.najjar@gmail.com', 'najjarNour@1w'),
+    ('ramzi.haddad@gmail.com', 'Rh45362@#'),
+    ('rima.halabieh@gmail.com', 'halabiehrima@32'),
+    ('jb89@gmail.com', 'PassJB@123'),
+    ('dk176@gmail.com', 'DK176Pass#'),
+    ('ls@gmail.com', 'Ls#Secure9'),
+    ('mn56@gmail.com', 'Mn56Pass$'),
+    ('mk56@gmail.com', 'MK#56987'),
+    ('wf02@gmail.com', 'WF02!Pass'),
+    ('as67@gmail.com', 'AS67Secure@'),
+    ('ns09@gmail.com', 'NS09#Pass'),
+    ('rm12@gmail.com', 'Rm12Safe@'),
+    ('rt65@gmail.com', 'RT65Pass!');
+
+
 
