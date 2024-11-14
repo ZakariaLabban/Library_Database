@@ -76,7 +76,7 @@ create table Dependents (
 
 );
 create table Supplier (
-    Supp_Name VARCHAR(50) NOT NULL,
+    Supp_Name VARCHAR(50) NOT NULL UNIQUE,
     Address TEXT NOT NULL,
     Phone_Number VARCHAR(10) NOT NULL UNIQUE,
     
@@ -111,7 +111,7 @@ create table Items (
 );
 
 CREATE TABLE Books_for_Sale (
-    ISBN CHAR(13) PRIMARY KEY,  
+    ISBN CHAR(13) NOT NULL,  
     Title VARCHAR(20) NOT NULL,
     Genre VARCHAR(20) NOT NULL,
     Price NUMERIC(10, 2) NOT NULL CHECK (Price > 0),  
@@ -129,8 +129,8 @@ CREATE TABLE Books_for_Sale (
 );
 
 CREATE TABLE Books_for_Rent (
-    BookID VARCHAR(16) PRIMARY KEY,  --format (ISBN#ID)
-    ISBN CHAR(13) NOT NULL UNIQUE,  
+    BookID VARCHAR(16) NOT NULL,  --format (ISBN#ID)
+    ISBN CHAR(13) NOT NULL,  
     Title VARCHAR(20) NOT NULL,
     Genre VARCHAR(20) NOT NULL,
     Price NUMERIC(10, 2) NOT NULL CHECK (Price > 0),  
