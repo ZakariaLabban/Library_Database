@@ -32,6 +32,19 @@ INSERT INTO Customer (Username, Phone_Number, Address, Sex, First_Name, Last_Nam
     ('es02', '71342764', 'Beirut, Verdun', 'M', 'Elie', 'Salameh', 'elie.salameh@gmail.com'),
     ('nm01', '78876520', 'Beirut, Hamra', 'F', 'Nadine', 'Mabsout', 'nadine.mabsout@gmail.com');
 
+INSERT INTO Library (BranchID, Address, Phone_Number) VALUES
+    ('LIBTECH01', 'Hamra', '01412344'),
+    ('LIBTECH02', 'Mazraa', '01513478'),
+    ('LIBTECH03', 'Jal El Dib', '04234432'),
+    ('LIBTECH04', 'Jounieh', '04512987'),
+    ('LIBTECH05', 'Jbeil', '08212121'),
+    ('LIBTECH06', 'Tripoli', '08787654'),
+    ('LIBTECH07', 'Zahle', '09128220'),
+    ('LIBTECH08', 'Saida', '07987098'),
+    ('LIBTECH09', 'Nabatieh', '07565890'),
+    ('LIBTECH10', 'Tyre', '07987911');
+
+
 INSERT INTO Staff (SSN, First_Name, Last_Name, DoB, Blood_Type, Address, Salary, Post, Super_SSN, St_Email, BranchID, Hours) VALUES
     ('123-45-6789', 'Jad', 'Bader', '1992-10-02', 'B+', 'Zahle', 3850, 'Manager', NULL, 'jb89@gmail.com', 'LIBTECH01', 40),
     ('234-56-7890', 'Dani', 'Kanaan', '2000-02-28', 'O-', 'Beirut', 2500, 'Librarian', '123-45-6789', 'dk176@gmail.com', 'LIBTECH01', 50),
@@ -46,7 +59,7 @@ INSERT INTO Staff (SSN, First_Name, Last_Name, DoB, Blood_Type, Address, Salary,
 INSERT INTO Dependents (SSN, Dep_Name, Relationship, Sex) VALUES
     ('123-45-6789', 'Sawsan', 'wife', 'F'),
     ('123-45-6789', 'Mohamad', 'son', 'M'),
-    ('234-56-7890', 'Tartour', 'wife', 'F'),
+    ('234-56-7890', 'Tia', 'wife', 'F'),
     ('345-67-8901', 'Akram', 'spouse', 'M'),
     ('456-78-9012', 'Zach', 'father', 'M'),
     ('567-89-0123', 'Samira', 'mother', 'F'),
@@ -54,18 +67,6 @@ INSERT INTO Dependents (SSN, Dep_Name, Relationship, Sex) VALUES
     ('890-12-3456', 'Roy', 'son', 'M'),
     ('901-23-4567', 'Joyce', 'mother', 'F'),
     ('901-23-4567', 'Georges', 'father', 'M');
-
-INSERT INTO Items (Barcode, Items_Name, Age_Group, Price, Genre, Supp_Name, Supp_Address, Qty_Supplied, Date_Supplied) VALUES
-    ('000000100001', 'Puzzle', '5-12', 50.00, 'Toys', 'JoueClub', 'Beirut', 100, '2024-10-20'),
-    ('000000201981', 'Maped Pencil', NULL, 2.50, 'Stationery', 'Maped', 'Beirut', 250, '2024-10-10'),
-    ('000000202290', 'Maped Eraser', NULL, 2.00, 'Stationery', 'Maped', 'Beirut', 250, '2024-10-10'),
-    ('000000302781', 'Frozen', '4-14', 10.00, 'DVD', 'DVDHome', 'Saida', 40, '2024-09-25'),
-    ('000000302402', 'Spy', '18+', 10.00, 'DVD', 'DVDHome', 'Saida', 40, '2024-09-25'),
-    ('000000305601', 'Spiderman', '6+', 10.00, 'DVD', 'DVDHome', 'Saida', 40, '2024-09-26'),
-    ('000000401341', 'GtaV', '18+', 25.00, 'Games', 'Najjar', 'Beirut', 150, '2023-02-02'),
-    ('000000402501', 'Fifa24', 'None', 25.00, 'Games', 'Najjar', 'Beirut', 400, '2023-11-10'),
-    ('000000402551', 'Uncharted3', '16+', 25.00, 'Games', 'Najjar', 'Beirut', 100, '2024-05-31'),
-    ('000000403001', 'Fifa23', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 120, '2024-01-05');
 
 INSERT INTO Supplier (Supp_Name, Address, Phone_Number) VALUES
     ('Najjar', 'Beirut', '01255412'),
