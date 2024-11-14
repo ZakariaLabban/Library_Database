@@ -83,15 +83,27 @@ INSERT INTO Supplier (Supp_Name, Address, Phone_Number) VALUES
 
 INSERT INTO Items (Barcode, Items_Name, Age_Group, Price, Genre, Supp_Name, Supp_Address, Qty_Supplied, Date_Supplied)
 VALUES
-(10001, 'Puzzle', '5-12', 50.00, 'Toys', 'JoueClub', 'Beirut', 100, '2024-10-20'),
-(20198, 'Maped Pencil', NULL, 2.50, 'Stationery', 'Maped', 'Beirut', 250, '2024-10-10'),
-(20290, 'Maped Eraser', NULL, 2.00, 'Stationery', 'Maped', 'Beirut', 250, '2024-10-10'),
-(30278, 'Frozen', '4-14', 10.00, 'DVD', 'DVDhome', 'Saida', 40, '2024-09-25'),
-(30240, 'Spy', '18+', 10.00, 'DVD', 'DVDhome', 'Saida', 40, '2024-09-25'),
-(30560, 'Spiderman', '6+', 10.00, 'DVD', 'DVDhome', 'Saida', 40, '2024-09-26'),
-(40134, 'GtaV', '18+', 25.00, 'Games', 'Najjar', 'Beirut', 150, '2023-02-20'),
-(40250, 'Fifa24', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 400, '2023-11-11'),
-(40255, 'Uncharted3', '16+', 25.00, 'Games', 'Najjar', 'Beirut', 100, '2024-05-31'),
-(40300, 'Fifa23', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 120, '2024-01-05');
+('0000000000001001', 'Puzzle', '5-12', 50.00, 'Toys', 'JoueClub', 'Beirut', 100, '2024-10-20'),
+('0000000000020198', 'Maped Pencil', NULL, 2.50, 'Stationery', 'Maped', 'Beirut', 250, '2024-10-10'),
+('0000000000020290', 'Maped Eraser', NULL, 2.00, 'Stationery', 'Maped', 'Beirut', 250, '2024-10-10'),
+('0000000000030278', 'Frozen', '4-14', 10.00, 'DVD', 'DVDhome', 'Saida', 40, '2024-09-25'),
+('0000000000030240', 'Spy', '18+', 10.00, 'DVD', 'DVDhome', 'Saida', 40, '2024-09-25'),
+('0000000000030560', 'Spiderman', '6+', 10.00, 'DVD', 'DVDhome', 'Saida', 40, '2024-09-26'),
+('0000000000040134', 'GtaV', '18+', 25.00, 'Games', 'Najjar', 'Beirut', 150, '2023-02-20'),
+('0000000000040250', 'Fifa24', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 400, '2023-11-11'),
+('0000000000040255', 'Uncharted3', '16+', 25.00, 'Games', 'Najjar', 'Beirut', 100, '2024-05-31'),
+('0000000000040300', 'Fifa23', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 120, '2024-01-05');
 
+INSERT INTO Publisher (Name, Address, Phone_Number)
+VALUES
+('Dar Al-Kitaba', 'Beirut,Hamra', '03355097'),
+('Dar Al-Nour', 'Mount Lebanon,Aley', '71232156'),
+('Lebanon Readings', 'Beirut, Cola', '76876425'),
+('Dar Al-Nasher', 'Jounieh', '03436352'),
+('Today News', 'Beirut', '09824262'),
+('Dar Al-Balad', 'Saida', '81423536'),
+('Dar Al-Maarifa', 'Nabatieh', '07634562'),
+('Dar Al-Fikr', 'Tripoli', '09643225'),
+('WassupLebanon', 'Jbeil', '71232321'),
+('Dar Al-Salam', 'Beirut', '81123333');
 
