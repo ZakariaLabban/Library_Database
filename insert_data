@@ -109,28 +109,30 @@ VALUES
 
 INSERT INTO Books_for_Sale (ISBN, Title, Genre, Price, Translator, Edition, Pages, Lang, Publisher_Name)
 VALUES
-('00000000002431', 'Electronics', 'Engineering', 89.00, NULL, 3, 356, 'English', 'Dar Al-Fikr'),
-('00000000003421', 'Alg&Geo', 'Maths', 24.50, NULL, 1, 87, 'English', 'Dar Al-Fikr'),
-('00000000004562', 'LearnArbic', 'Literature', 30.00, 'Asmaa Karam', 2, 102, 'Arabic', 'Dar Al-Salam'),
-('00000000004989', 'MenDuties', 'Psychology', 35.50, NULL, 1, 234, 'English', 'Dar Al-Balad'),
-('00000000005232', 'GirlsPower', 'Psychology', 120.00, NULL, 1, 675, 'English', 'WassupLebanon'),
-('00000000005900', 'LifeonEarth', 'Geography', 100.00, NULL, 4, 200, 'English', 'Today News'),
-('00000000006113', 'Voila', 'Literature', 31.25, 'Karim Akram', 5, 150, 'French', 'Dar Al-Salam'),
-('00000000006772', 'Quand?', 'Literature', 76.25, 'Yolga Safa', 2, 89, 'French', 'Dar Al-Maarifa'),
-('00000000007880', 'Seniorita', 'Literature', 55.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr'),
-('00000000007994', 'Wander', 'Geography', 46.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad');
+('0000000002431', 'Electronics', 'Engineering', 89.00, NULL, 3, 356, 'English', 'Dar Al-Fikr'),
+('0000000003421', 'Alg&Geo', 'Maths', 24.50, NULL, 1, 87, 'English', 'Dar Al-Fikr'),
+('0000000004562', 'LearnArbic', 'Literature', 30.00, 'Asmaa Karam', 2, 102, 'Arabic', 'Dar Al-Salam'),
+('0000000004989', 'MenDuties', 'Psychology', 35.50, NULL, 1, 234, 'English', 'Dar Al-Balad'),
+('0000000005232', 'GirlsPower', 'Psychology', 120.00, NULL, 1, 675, 'English', 'WassupLebanon'),
+('0000000005900', 'LifeonEarth', 'Geography', 100.00, NULL, 4, 200, 'English', 'Today News'),
+('0000000006113', 'Voila', 'Literature', 31.25, 'Karim Akram', 5, 150, 'French', 'Dar Al-Salam'),
+('0000000006772', 'Quand?', 'Literature', 76.25, 'Yolga Safa', 2, 89, 'French', 'Dar Al-Maarifa'),
+('0000000007880', 'Seniorita', 'Literature', 55.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr'),
+('0000000007994', 'Wander', 'Geography', 46.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad');
 
-INSERT INTO Books_for_Rent (BookID, ISBN, Title, Genre, Price, Translator, Edition, Pages, Language, Publisher_Name, Shelf_No, Row_No, BranchID)
+INSERT INTO Books_for_Rent (BookID, ISBN, Title, Genre, Price, Translator, Edition, Pages, Lang, Publisher_Name, Shelf_No, Row_No, BranchID)
 VALUES
-('00000000002431#01', '00000000002431', 'Electronics', 'Engineering', 10.00, NULL, 3, 356, 'English', 'Dar Al-Fikr', 25, 1, 'LB01'),
-('00000000003421#12', '00000000003421', 'Alg&Geo', 'Maths', 10.00, NULL, 1, 87, 'English', 'Dar Al-Fikr', 12, 3, 'LB01'),
-('00000000004562#12', '00000000004562', 'LearnArbic', 'Literature', 15.00, 'Asmaa Karam', 2, 102, 'Arabic', 'Dar Al-Salam', 12, 5, 'LB02'),
-('00000000004989#23', '00000000004989', 'MenDuties', 'Psychology', 12.00, NULL, 1, 234, 'English', 'Dar Al-Balad', 16, 4, 'LB05'),
-('00000000005232#03', '00000000005232', 'GirlsPower', 'Psychology', 70.00, NULL, 1, 675, 'English', 'WassupLebanon', 17, 6, 'LB05'),
-('00000000005900#02', '00000000005900', 'LifeonEarth', 'Geography', 80.00, NULL, 4, 200, 'Today News', 02, 2, 'LB06'),
-('00000000006113#20', '00000000006113', 'Voila', 'Literature', 15.00, 'Karim Akram', 5, 150, 'French', 'Dar Al-Salam', 13, 4, 'LB07'),
-('00000000006772#12', '00000000006772', 'Quand?', 'Literature', 20.00, 'Yolga Safa', 2, 89, 'French', 'Dar Al-Maarifa', 19, 1, 'LB02'),
-('00000000007880#01', '00000000007880', 'Seniorita', 'Literature', 25.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr', 19, 3, 'LB02'),
-('00000000007994#10', '00000000007994', 'Wander', 'Geography', 16.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad', 02, 5, 'LB05');
+('0000000002431#01', '0000000002431', 'Electronics', 'Engineering', 10.00, NULL, 3, 356, 'English', 'Dar Al-Fikr', 25, 1, 'LIBTECH01'),
+('0000000003421#12', '0000000003421', 'Alg&Geo', 'Maths', 10.00, NULL, 1, 87, 'English', 'Dar Al-Fikr', 12, 3, 'LIBTECH01'),
+('0000000004562#12', '0000000004562', 'LearnArbic', 'Literature', 15.00, 'Asmaa Karam', 2, 102, 'Arabic', 'Dar Al-Salam', 12, 5, 'LIBTECH02'),
+('0000000004989#23', '0000000004989', 'MenDuties', 'Psychology', 12.00, NULL, 1, 234, 'English', 'Dar Al-Balad', 16, 4, 'LIBTECH05'),
+('0000000005232#03', '0000000005232', 'GirlsPower', 'Psychology', 70.00, NULL, 1, 675, 'English', 'WassupLebanon', 17, 6, 'LIBTECH05'),
+('0000000005900#02', '0000000005900', 'LifeonEarth', 'Geography', 80.00, NULL, 4, 200, 'Today News', 02, 2, 'LIBTECH06'),
+('0000000006113#20', '0000000006113', 'Voila', 'Literature', 15.00, 'Karim Akram', 5, 150, 'French', 'Dar Al-Salam', 13, 4, 'LIBTECH07'),
+('0000000006772#12', '0000000006772', 'Quand?', 'Literature', 20.00, 'Yolga Safa', 2, 89, 'French', 'Dar Al-Maarifa', 19, 1, 'LIBTECH02'),
+('0000000007880#01', '0000000007880', 'Seniorita', 'Literature', 25.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr', 19, 3, 'LIBTECH02'),
+('0000000007994#10', '0000000007994', 'Wander', 'Geography', 16.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad', 02, 5, 'LIBTECH05');
+
+
 
 
