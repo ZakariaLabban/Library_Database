@@ -109,12 +109,48 @@ create table Items (
         ON UPDATE CASCADE
         ON DELETE SET NULL
 );
-create table Books_for_Sale (
 
+CREATE TABLE Books_for_Sale (
+    ISBN CHAR(13) PRIMARY KEY,  
+    Title VARCHAR(20) NOT NULL,
+    Genre VARCHAR(20) NOT NULL,
+    Price NUMERIC(10, 2) CONSTRAINT chk_Books_for_Sale_Price CHECK (Price > 0),  
+    -- NUMERIC(10,2) allows values ranging from -99999999.99 to 99999999.99
+    -- used for precise financial values to avoid rounding errors
+    Translator VARCHAR(50),
+    Edition INT CONSTRAINT chk_Books_for_Sale_Edition CHECK (Edition > 0) NOT NULL,  
+    Pages INT CONSTRAINT chk_Books_for_Sale_Pages CHECK (Pages > 0) NOT NULL,  
+    Language VARCHAR(20) NOT NULL,
+    Publisher_Name VARCHAR(50) NOT NULL,  
+    CONSTRAINT pk_Books_for_Sale PRIMARY KEY (ISBN),  
+    CONSTRAINT fk_Books_for_Sale FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Name) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL  
 );
-create table Books_for_Rent (
 
+CREATE TABLE Books_for_Rent (
+    BookID VARCHAR(10) PRIMARY KEY,  --format (ISBN#ID)
+    ISBN CHAR(13) NOT NULL UNIQUE,  
+    Title VARCHAR(20) NOT NULL,
+    Genre VARCHAR(20) NOT NULL,
+    Price NUMERIC(10, 2) CONSTRAINT chk_Books_for_Rent_Price CHECK (Price > 0),  
+    Translator VARCHAR(50),
+    Edition INT CONSTRAINT chk_Books_for_Rent_Edition CHECK (Edition > 0) NOT NULL,  
+    Pages INT CONSTRAINT chk_Books_for_Rent_Pages CHECK (Pages > 0) NOT NULL,  
+    Language VARCHAR(20) NOT NULL,
+    Publisher_Name VARCHAR(50) NOT NULL,  
+    Shelf_No INT CONSTRAINT chk_Shelf_No CHECK (Shelf_No > 0),  
+    Row_No INT CONSTRAINT chk_Row_No CHECK (Row_No > 0),  
+    BranchID VARCHAR(10) NOT NULL UNIQUE,  
+
+    CONSTRAINT pk_Books_for_Rent PRIMARY KEY (BookID),
+    CONSTRAINT fk_Books_for_Rent_1 FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Name) 
+        ON UPDATE CASCADE ON DELETE SET NULL,  
+    CONSTRAINT fk_Books_for_Rent_2 FOREIGN KEY (BranchID) REFERENCES Library(BranchID) 
+        ON UPDATE CASCADE ON DELETE SET NULL
 );
+
+
 create table Authors_BookSale (
 
 );
