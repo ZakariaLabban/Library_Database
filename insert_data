@@ -133,6 +133,31 @@ VALUES
 ('0000000007880#01', '0000000007880', 'Seniorita', 'Literature', 25.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr', 19, 3, 'LIBTECH02'),
 ('0000000007994#10', '0000000007994', 'Wander', 'Geography', 16.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad', 02, 5, 'LIBTECH05');
 
+INSERT INTO Authors_booksale (ISBN, Author_Name)
+VALUES
+('0000000002431', 'Sandra Smith'),
+('0000000003421', 'Francois Olivier'),
+('0000000003421', 'Maurice Dupont'),
+('0000000004562', 'Rawad Kaadan'),
+('0000000004562', 'Raed Lawand'),
+('0000000004562', 'Wael Kassis'),
+('0000000006772', 'Zeinab Kalach'),
+('0000000006772', 'Pamela Hokayem'),
+('0000000007880', 'Camilla Ponduras'),
+('0000000007994', 'Donald Harris');
+
+INSERT INTO Authors_bookrent (BookID, Author_Name)
+VALUES
+('0000000002431#01', 'Sandra Smith'),
+('0000000003421#12', 'Francois Olivier'),
+('0000000004562#12', 'Maurice Dupont'),
+('0000000004989#23', 'Rawad Kaadan'),
+('0000000005232#03', 'Raed Lawand'),
+('0000000005900#02', 'Wael Kassis'),
+('0000000006113#20', 'Zeinab Kalach'),
+('0000000006772#12', 'Pamela Hokayem'),
+('0000000007880#01', 'Camilla Ponduras'),
+('0000000007994#10', 'Donald Harris');
 
 
 
