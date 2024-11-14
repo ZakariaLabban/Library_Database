@@ -107,4 +107,16 @@ VALUES
 ('WassupLebanon', 'Jbeil', '71232321'),
 ('Dar Al-Salam', 'Beirut', '81123333');
 
+INSERT INTO Books_for_Sale (ISBN, Title, Genre, Price, Translator, Edition, Pages, Language, Publisher_Name)
+VALUES
+('00000000002431', 'Electronics', 'Engineering', 89.00, NULL, 3, 356, 'English', 'Dar Al-Fikr'),
+('00000000003421', 'Alg&Geo', 'Maths', 24.50, NULL, 1, 87, 'English', 'Dar Al-Fikr'),
+('00000000004562', 'LearnArbic', 'Literature', 30.00, 'Asmaa Karam', 2, 102, 'Arabic', 'Dar Al-Salam'),
+('00000000004989', 'MenDuties', 'Psychology', 35.50, NULL, 1, 234, 'English', 'Dar Al-Balad'),
+('00000000005232', 'GirlsPower', 'Psychology', 120.00, NULL, 1, 675, 'English', 'WassupLebanon'),
+('00000000005900', 'LifeonEarth', 'Geography', 100.00, NULL, 4, 200, 'English', 'Today News'),
+('00000000006113', 'Voila', 'Literature', 31.25, 'Karim Akram', 5, 150, 'French', 'Dar Al-Salam'),
+('00000000006772', 'Quand?', 'Literature', 76.25, 'Yolga Safa', 2, 89, 'French', 'Dar Al-Maarifa'),
+('00000000007880', 'Seniorita', 'Literature', 55.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr'),
+('00000000007994', 'Wander', 'Geography', 46.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad');
 
