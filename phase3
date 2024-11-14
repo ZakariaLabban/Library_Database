@@ -172,9 +172,18 @@ CREATE TABLE Authors_BookRent (
 );
 
 
-create table Stores_Items (
+CREATE TABLE Stores_Items (
+    BranchID VARCHAR(10) NOT NULL UNIQUE,  
+    Barcode INT NOT NULL UNIQUE,  
+    Qty_Stored INT CONSTRAINT chk_Qty_Stored CHECK (Qty_Stored > 0),  
 
+    CONSTRAINT pk_Stores_Items PRIMARY KEY (BranchID, Barcode),
+
+    CONSTRAINT fk_Stores_Items FOREIGN KEY (BranchID) REFERENCES Library(BranchID)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+
 create table Stores_Booksforsale (
 
 );
