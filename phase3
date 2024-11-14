@@ -22,7 +22,7 @@ create table Customer (
     Email VARCHAR(50) UNIQUE,
     
     CONSTRAINT pk_Customer PRIMARY KEY (Username),
-    CONSTRAINT fk_Customer FOREIGN KEY (Email) REFERENCES Authentication_System(Email)
+    CONSTRAINT fk_Customer_Email FOREIGN KEY (Email) REFERENCES Authentication_System(Email)
         ON UPDATE CASCADE
         ON DELETE SET NULL,
     CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~  '^[0-9]{2}/[0-9]{6}$' )
@@ -52,13 +52,13 @@ create table Staff (
     Hours INTEGER CHECK (Hours >= 0),
 
     CONSTRAINT pk_Staff PRIMARY KEY (SSN),
-    CONSTRAINT fk_Staff FOREIGN KEY (St_Email) REFERENCES Authentication_System(Email)
+    CONSTRAINT fk_Staff_St_Email FOREIGN KEY (St_Email) REFERENCES Authentication_System(Email)
         ON UPDATE CASCADE
         ON DELETE SET NULL,
-    CONSTRAINT fk_Staff FOREIGN KEY (BranchID) REFERENCES Library(BranchID)
+    CONSTRAINT fk_Staff_BranchID FOREIGN KEY (BranchID) REFERENCES Library(BranchID)
         ON UPDATE CASCADE
         ON DELETE SET NULL,
-    CONSTRAINT fk_Staff FOREIGN KEY (Super_SSN) REFERENCES Staff(SSN)
+    CONSTRAINT fk_Staff_Super_SSN FOREIGN KEY (Super_SSN) REFERENCES Staff(SSN)
         ON UPDATE CASCADE
         ON DELETE SET NULL
 
@@ -70,7 +70,7 @@ create table Dependents (
     Sex CHAR(1) NOT NULL CHECK (Sex IN ('M', 'F')),
 
     CONSTRAINT pk_Dependents PRIMARY KEY (SSN, Dep_Name),
-    CONSTRAINT fk_Dependents FOREIGN KEY (SSN) REFERENCES Staff(SSN)
+    CONSTRAINT fk_Dependents_SSN FOREIGN KEY (SSN) REFERENCES Staff(SSN)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 
@@ -105,7 +105,7 @@ create table Items (
     Date_Supplied DATE NOT NULL,
 
     CONSTRAINT pk_Items PRIMARY KEY (Barcode),
-    CONSTRAINT fk_Items FOREIGN KEY (Supp_Name) REFERENCES Supplier(Name)
+    CONSTRAINT fk_Items_Supp_Name FOREIGN KEY (Supp_Name) REFERENCES Supplier(Name)
         ON UPDATE CASCADE
         ON DELETE SET NULL
 );
@@ -123,7 +123,7 @@ CREATE TABLE Books_for_Sale (
     Language VARCHAR(20) NOT NULL,
     Publisher_Name VARCHAR(50) NOT NULL,  
     CONSTRAINT pk_Books_for_Sale PRIMARY KEY (ISBN),  
-    CONSTRAINT fk_Books_for_Sale FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Name) 
+    CONSTRAINT fk_Books_for_Sale_Publisher_Name FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Name) 
         ON UPDATE CASCADE 
         ON DELETE SET NULL  
 );
@@ -144,9 +144,9 @@ CREATE TABLE Books_for_Rent (
     BranchID VARCHAR(10) NOT NULL UNIQUE,  
 
     CONSTRAINT pk_Books_for_Rent PRIMARY KEY (BookID),
-    CONSTRAINT fk_Books_for_Rent_1 FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Name) 
+    CONSTRAINT fk_Books_for_Rent_Publsiher_Name FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Name) 
         ON UPDATE CASCADE ON DELETE SET NULL,  
-    CONSTRAINT fk_Books_for_Rent_2 FOREIGN KEY (BranchID) REFERENCES Library(BranchID) 
+    CONSTRAINT fk_Books_for_Rent_BranchID FOREIGN KEY (BranchID) REFERENCES Library(BranchID) 
         ON UPDATE CASCADE ON DELETE SET NULL
 );
 
@@ -157,7 +157,7 @@ CREATE TABLE Authors_BookSale (
 
     CONSTRAINT pk_Authors_BookSale PRIMARY KEY (ISBN, Author_Name),
 
-    CONSTRAINT fk_Authors_BookSale FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN) 
+    CONSTRAINT fk_Authors_BookSale_ISBN FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN) 
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -167,7 +167,7 @@ CREATE TABLE Authors_BookRent (
 
     CONSTRAINT pk_Authors_BookRent PRIMARY KEY (BookID, Author_Name),
 
-    CONSTRAINT fk_Authors_BookRent FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID) 
+    CONSTRAINT fk_Authors_BookRent_BookID FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID) 
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -179,7 +179,7 @@ CREATE TABLE Stores_Items (
 
     CONSTRAINT pk_Stores_Items PRIMARY KEY (BranchID, Barcode),
 
-    CONSTRAINT fk_Stores_Items FOREIGN KEY (BranchID) REFERENCES Library(BranchID)
+    CONSTRAINT fk_Stores_Items_BranchID FOREIGN KEY (BranchID) REFERENCES Library(BranchID)
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
