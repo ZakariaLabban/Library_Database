@@ -107,7 +107,7 @@ VALUES
 ('WassupLebanon', 'Jbeil', '71232321'),
 ('Dar Al-Salam', 'Beirut', '81123333');
 
-INSERT INTO Books_for_Sale (ISBN, Title, Genre, Price, Translator, Edition, Pages, Language, Publisher_Name)
+INSERT INTO Books_for_Sale (ISBN, Title, Genre, Price, Translator, Edition, Pages, Lang, Publisher_Name)
 VALUES
 ('00000000002431', 'Electronics', 'Engineering', 89.00, NULL, 3, 356, 'English', 'Dar Al-Fikr'),
 ('00000000003421', 'Alg&Geo', 'Maths', 24.50, NULL, 1, 87, 'English', 'Dar Al-Fikr'),
