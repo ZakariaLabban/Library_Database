@@ -94,7 +94,7 @@ VALUES
 ('0000000000040255', 'Uncharted3', '16+', 25.00, 'Games', 'Najjar', 'Beirut', 100, '2024-05-31'),
 ('0000000000040300', 'Fifa23', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 120, '2024-01-05');
 
-INSERT INTO Publisher (Name, Address, Phone_Number)
+INSERT INTO Publisher (Publisher_Name, Address, Phone_Number)
 VALUES
 ('Dar Al-Kitaba', 'Beirut,Hamra', '03355097'),
 ('Dar Al-Nour', 'Mount Lebanon,Aley', '71232156'),
@@ -106,4 +106,5 @@ VALUES
 ('Dar Al-Fikr', 'Tripoli', '09643225'),
 ('WassupLebanon', 'Jbeil', '71232321'),
 ('Dar Al-Salam', 'Beirut', '81123333');
+
 
