@@ -11,7 +11,7 @@ INSERT INTO Authentication_System (Email, Passcode) VALUES
     ('rima.halabieh@gmail.com', 'halabiehrima@32'),
     ('jb89@gmail.com', 'PassJB@123'),
     ('dk176@gmail.com', 'DK176Pass#'),
-    ('ls@gmail.com', 'Ls#Secure9'),
+    ('ls098@gmail.com', 'Ls#Secure9'),
     ('mn56@gmail.com', 'Mn56Pass$'),
     ('mk56@gmail.com', 'MK#56987'),
     ('wf02@gmail.com', 'WF02!Pass'),
