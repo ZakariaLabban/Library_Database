@@ -151,12 +151,27 @@ CREATE TABLE Books_for_Rent (
 );
 
 
-create table Authors_BookSale (
+CREATE TABLE Authors_BookSale (
+    ISBN CHAR(13) NOT NULL,  
+    Author_Name VARCHAR(50) NOT NULL,  
 
-);
-create table Authors_BookRent (
+    CONSTRAINT pk_Authors_BookSale PRIMARY KEY (ISBN, Author_Name),
 
+    CONSTRAINT fk_Authors_BookSale FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN) 
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+CREATE TABLE Authors_BookRent (
+    BookID VARCHAR(10) NOT NULL,  
+    Author_Name VARCHAR(50) NOT NULL, 
+
+    CONSTRAINT pk_Authors_BookRent PRIMARY KEY (BookID, Author_Name),
+
+    CONSTRAINT fk_Authors_BookRent FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID) 
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
 create table Stores_Items (
 
 );
