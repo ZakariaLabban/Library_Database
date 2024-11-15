@@ -129,7 +129,7 @@ CREATE TABLE Books_for_Sale (
 );
 
 CREATE TABLE Books_for_Rent (
-    BookID VARCHAR(16) NOT NULL,  --format (ISBN#ID)
+    BookID VARCHAR(17) NOT NULL,  --format (ISBN#ID)
     ISBN CHAR(13) NOT NULL,  
     Title VARCHAR(20) NOT NULL,
     Genre VARCHAR(20) NOT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE Authors_BookSale (
 );
 
 CREATE TABLE Authors_BookRent (
-    BookID VARCHAR(16) NOT NULL,  
+    BookID VARCHAR(17) NOT NULL,  
     Author_Name VARCHAR(50) NOT NULL, 
 
     CONSTRAINT pk_Authors_BookRent PRIMARY KEY (BookID, Author_Name),
@@ -237,7 +237,7 @@ create table Purchases_Items (
 );
 create table Borrows (
     Username VARCHAR(20) NOT NULL,  
-    BookID VARCHAR(16) NOT NULL,  
+    BookID VARCHAR(17) NOT NULL,  
     Date_Out DATE NOT NULL,  
     Due_Date DATE NOT NULL,  
     Penalty DECIMAL(10, 2) DEFAULT 0 CHECK (Penalty >= 0),  
@@ -252,7 +252,7 @@ create table Borrows (
 );
 create table Sale_to_Rent (
     
-    BookID VARCHAR(16) NOT NULL,  
+    BookID VARCHAR(17) NOT NULL,  
     ISBN CHAR(13) NOT NULL,  
     Date_Moved DATE NOT NULL,  
     Discount DECIMAL(5, 2) DEFAULT 0 CHECK (Discount >= 0 AND Discount <= 100),   --discount is %
