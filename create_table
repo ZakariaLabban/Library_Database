@@ -45,7 +45,7 @@ create table Staff (
     Blood_Type CHAR(3) NOT NULL CHECK (Blood_Type IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')),
     Address TEXT NOT NULL,
     Salary NUMERIC CHECK (Salary > 0),
-    Post VARCHAR(20) NOT NULL,
+    Post TEXT NOT NULL,
     Super_SSN VARCHAR(11),
     St_Email VARCHAR(50) UNIQUE,
     BranchID VARCHAR(10),
@@ -98,7 +98,7 @@ create table Items (
     Items_Name VARCHAR(50) NOT NULL,
     Age_Group VARCHAR(10),
     Price NUMERIC NOT NULL CHECK (Price > 0),
-    Genre VARCHAR(20),
+    Genre TEXT,
     Supp_Name VARCHAR(50),
     Supp_Address TEXT,
     Qty_Supplied INTEGER NOT NULL CHECK (Qty_Supplied >= 0),
@@ -112,15 +112,15 @@ create table Items (
 
 CREATE TABLE Books_for_Sale (
     ISBN CHAR(13) NOT NULL,  
-    Title VARCHAR(20) NOT NULL,
-    Genre VARCHAR(20) NOT NULL,
+    Title TEXT NOT NULL,
+    Genre TEXT NOT NULL,
     Price NUMERIC(10, 2) NOT NULL CHECK (Price > 0),  
     -- NUMERIC(10,2) allows values ranging from -99999999.99 to 99999999.99
     -- used for precise financial values to avoid rounding errors
     Translator VARCHAR(50),
     Edition INT NOT NULL CHECK (Edition > 0),  
     Pages INT NOT NULL CHECK(Pages > 0) ,  
-    Lang VARCHAR(20) NOT NULL,
+    Lang VARCHAR(40) NOT NULL,
     Publisher_Name VARCHAR(50),  
     CONSTRAINT pk_Books_for_Sale PRIMARY KEY (ISBN),  
     CONSTRAINT fk_Books_for_Sale FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Publisher_Name) 
@@ -131,13 +131,13 @@ CREATE TABLE Books_for_Sale (
 CREATE TABLE Books_for_Rent (
     BookID VARCHAR(17) NOT NULL,  --format (ISBN#ID)
     ISBN CHAR(13) NOT NULL,  
-    Title VARCHAR(20) NOT NULL,
-    Genre VARCHAR(20) NOT NULL,
+    Title TEXT NOT NULL,
+    Genre TEXT NOT NULL,
     Price NUMERIC(10, 2) NOT NULL CHECK (Price > 0),  
     Translator VARCHAR(50),
     Edition INT NOT NULL CHECK (Edition > 0) ,  
     Pages INT NOT NULL CHECK (Pages > 0),  
-    Lang VARCHAR(20) NOT NULL,
+    Lang VARCHAR(40) NOT NULL,
     Publisher_Name VARCHAR(50),  
     Shelf_No INT NOT NULL CHECK (Shelf_No > 0),  
     Row_No INT NOT NULL CHECK (Row_No > 0),  
