@@ -2,18 +2,18 @@ INSERT INTO Authentication_System (Email, Passcode) VALUES
     ('elias.nasr@gmail.com', 'Nasr321#'),
     ('elie.salameh@gmail.com', 'passElie56&'),
     ('fouad.maalouf@gmail.com', 'Fouadex231%'),
-    ('georges.hareb@gmail.com', 'Passgeorges45'),
-    ('jad.barakat@gmail.com', 'Passjadbarakatt2'),
+    ('georges.hareb@gmail.com', 'Passgeorges4*5'),
+    ('jad.barakat@gmail.com', 'Passjadbarakat*t2'),
     ('joelle.fares@gmail.com', 'Jojo9024%'),
-    ('nadine.mabsout@gmail.com', 'Nadoumemabsout#@'),
+    ('nadine.mabsout@gmail.com', 'Nadoume2mabsout#@'),
     ('nour.najjar@gmail.com', 'najjarNour@1w'),
     ('ramzi.haddad@gmail.com', 'Rh45362@#'),
-    ('rima.halabieh@gmail.com', 'halabiehrima@32'),
+    ('rima.halabieh@gmail.com', 'Halabiehrima@32'),
     ('jb89@gmail.com', 'PassJB@123'),
     ('dk176@gmail.com', 'DK176Pass#'),
     ('ls098@gmail.com', 'Ls#Secure9'),
     ('mn56@gmail.com', 'Mn56Pass$'),
-    ('mk56@gmail.com', 'MK#56987'),
+    ('mk56@gmail.com', 'Mk#56987'),
     ('wf02@gmail.com', 'WF02!Pass'),
     ('as67@gmail.com', 'AS67Secure@'),
     ('ns09@gmail.com', 'NS09#Pass'),
@@ -32,7 +32,7 @@ INSERT INTO Customer (Username, Phone_Number, Address, Sex, First_Name, Last_Nam
     ('es02', '71/342764', 'Beirut, Verdun', 'M', 'Elie', 'Salameh', 'elie.salameh@gmail.com'),
     ('nm01', '78/876520', 'Beirut, Hamra', 'F', 'Nadine', 'Mabsout', 'nadine.mabsout@gmail.com');
 
-INSERT INTO Library (BranchID, Address, Phone_Number) VALUES
+INSERT INTO Libraryy (BranchID, Address, Phone_Number) VALUES
     ('LIBTECH01', 'Hamra', '01/412344'),
     ('LIBTECH02', 'Mazraa', '01/513478'),
     ('LIBTECH03', 'Jal El Dib', '04/234432'),
@@ -48,7 +48,7 @@ INSERT INTO Library (BranchID, Address, Phone_Number) VALUES
 INSERT INTO Staff (SSN, First_Name, Last_Name, DoB, Blood_Type, Address, Salary, Post, Super_SSN, St_Email, BranchID, Hours) VALUES
     ('123-45-6789', 'Jad', 'Bader', '1992-10-02', 'B+', 'Zahle', 3850, 'Manager', NULL, 'jb89@gmail.com', 'LIBTECH01', 40),
     ('234-56-7890', 'Dani', 'Kanaan', '2000-02-28', 'O-', 'Beirut', 2500, 'Librarian', '123-45-6789', 'dk176@gmail.com', 'LIBTECH01', 50),
-    ('345-67-8901', 'Lama', 'Saab', '2001-01-22', 'A-', 'Beirut', 2300, 'Librarian', '123-45-6789', 'ls@gmail.com', 'LIBTECH01', 60),
+    ('345-67-8901', 'Lama', 'Saab', '2001-01-22', 'A-', 'Beirut', 2300, 'Librarian', '123-45-6789', 'ls098@gmail.com', 'LIBTECH01', 60),
     ('456-78-9012', 'Mona', 'Ramadan', '1998-05-16', 'A+', 'Saida', 1000, 'Clerk', '345-67-8901', 'mn56@gmail.com', 'LIBTECH01', 60),
     ('567-89-0123', 'Marwan', 'Kodeih', '1987-07-07', 'B-', 'Jbeil', 3000, 'Librarian', NULL, 'mk56@gmail.com', 'LIBTECH03', 45),
     ('678-90-1234', 'Wael', 'Fattouh', '1992-12-10', 'B+', 'Tyr', 2850, 'Librarian', '567-89-0123', 'wf02@gmail.com', 'LIBTECH03', 50),
@@ -127,7 +127,7 @@ VALUES
 ('0000000004562#012', '0000000004562', 'LearnArbic', 'Literature', 15.00, 'Asmaa Karam', 2, 102, 'Arabic', 'Dar Al-Salam', 12, 5, 'LIBTECH02'),
 ('0000000004989#023', '0000000004989', 'MenDuties', 'Psychology', 12.00, NULL, 1, 234, 'English', 'Dar Al-Balad', 16, 4, 'LIBTECH05'),
 ('0000000005232#003', '0000000005232', 'GirlsPower', 'Psychology', 70.00, NULL, 1, 675, 'English', 'WassupLebanon', 17, 6, 'LIBTECH05'),
-('0000000005900#002', '0000000005900', 'LifeonEarth', 'Geography', 80.00, NULL, 4, 200, 'Today News', 02, 2, 'LIBTECH06'),
+('0000000005900#002', '0000000005900', 'LifeonEarth', 'Geography', 80.00, NULL, 4, 200,'English','Today News', 02, 2, 'LIBTECH06'),
 ('0000000006113#020', '0000000006113', 'Voila', 'Literature', 15.00, 'Karim Akram', 5, 150, 'French', 'Dar Al-Salam', 13, 4, 'LIBTECH07'),
 ('0000000006772#012', '0000000006772', 'Quand?', 'Literature', 20.00, 'Yolga Safa', 2, 89, 'French', 'Dar Al-Maarifa', 19, 1, 'LIBTECH02'),
 ('0000000007880#001', '0000000007880', 'Seniorita', 'Literature', 25.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr', 19, 3, 'LIBTECH02'),
@@ -178,16 +178,16 @@ INSERT INTO Stores_booksforsale (BranchID, ISBN, Number_of_Copies)
 VALUES
     ('LIBTECH01', '0000000002431', 12),
     ('LIBTECH03', '0000000003421', 34),
-    ('LIBTECH03', '0000000003421', 23),
-    ('LIBTECH04', '0000000004562', 21),
-    ('LIBTECH05', '0000000004562', 23),
+    ('LIBTECH02', '0000000003421', 23),
+    ('LIBTECH03', '0000000004562', 21),
+    ('LIBTECH04', '0000000004562', 23),
     ('LIBTECH05', '0000000004562', 33),
     ('LIBTECH06', '0000000006772', 10),
     ('LIBTECH07', '0000000006772', 9),
     ('LIBTECH08', '0000000007880', 3),
     ('LIBTECH09', '0000000007994', 18);
 
-INSERT INTO Buys_Books (Username, BranchID, ISBN, Quantity, DateTime)
+INSERT INTO Buys_Books (Username, BranchID, ISBN, Quantity, Date_Time)
 VALUES
     ('en01', 'LIBTECH01', '0000000002431', 2, '2024-10-01 11:12:23'),
     ('gh21', 'LIBTECH02', '0000000003421', 1, '2024-09-10 13:31:02'),
@@ -200,7 +200,7 @@ VALUES
     ('es02', 'LIBTECH09', '0000000007880', 3, '2024-05-31 17:32:06'),
     ('nm01', 'LIBTECH10', '0000000007994', 1, '2024-08-06 11:57:05');
 
-INSERT INTO Purchases_Items (Username, BranchID, Barcode, Quantity, DateTime)
+INSERT INTO Purchases_Items (Username, BranchID, Barcode, Quantity, Date_Time)
 VALUES
     ('en01', 'LIBTECH01', '0000000000010001', 2, '2024-10-01 11:12:23'),
     ('gh21', 'LIBTECH02', '0000000000020198', 1, '2024-09-10 13:31:02'),
@@ -214,7 +214,7 @@ VALUES
     ('nm01', 'LIBTECH10', '0000000000040300', 1, '2024-08-06 11:57:05');
 
 
-INSERT INTO Borrows (Username, BookID, Date_Out, DueDate, Penalty)
+INSERT INTO Borrows (Username, BookID, Date_Out, Due_Date, Penalty)
 VALUES
     ('en01', '0000000002431#001', '2024-05-05', '2024-05-15', 10.00),
     ('gh21', '0000000003421#012', '2024-07-25', '2024-08-05', 10.00),
@@ -239,9 +239,3 @@ VALUES
     ('0000000006772#012', '0000000006772', '2024-08-31', 35.00),
     ('0000000007880#001', '0000000007880', '2024-08-30', 35.00),
     ('0000000007994#010', '0000000007994', '2024-08-23', 35.00);
-
-
-
-
-
-
