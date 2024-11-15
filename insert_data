@@ -21,28 +21,28 @@ INSERT INTO Authentication_System (Email, Passcode) VALUES
     ('rt65@gmail.com', 'RT65Pass!');
 
 INSERT INTO Customer (Username, Phone_Number, Address, Sex, First_Name, Last_Name, Ct_Email) VALUES
-    ('en01', '71812354', 'Tripoli, Mina', 'M', 'Elias', 'Nasr', 'elias.nasr@gmail.com'),
-    ('gh21', '76123765', 'Baabda, Hazmieh', 'M', 'Georges', 'Hareb', 'georges.hareb@gmail.com'),
-    ('jf10', '81209453', 'Baalback, Kaa', 'F', 'Joelle', 'Fares', 'joelle.fares@gmail.com'),
-    ('fm02', '70231539', 'Jbeil, Edde', 'M', 'Fouad', 'Maalouf', 'fouad.maalouf@gmail.com'),
-    ('jb01', '03356472', 'Beirut, Verdun', 'M', 'Jad', 'Barakat', 'jad.barakat@gmail.com'),
-    ('nn12', '78324536', 'Zahle, Ksara', 'F', 'Nour', 'Najjar', 'nour.najjar@gmail.com'),
-    ('rh17', '03564992', 'Saida, Taameer', 'M', 'Ramzi', 'Haddad', 'ramzi.haddad@gmail.com'),
-    ('rh18', '76172321', 'Beirut, Raouche', 'F', 'Rima', 'Halabieh', 'rima.halabieh@gmail.com'),
-    ('es02', '71342764', 'Beirut, Verdun', 'M', 'Elie', 'Salameh', 'elie.salameh@gmail.com'),
-    ('nm01', '78876520', 'Beirut, Hamra', 'F', 'Nadine', 'Mabsout', 'nadine.mabsout@gmail.com');
+    ('en01', '71/812354', 'Tripoli, Mina', 'M', 'Elias', 'Nasr', 'elias.nasr@gmail.com'),
+    ('gh21', '76/123765', 'Baabda, Hazmieh', 'M', 'Georges', 'Hareb', 'georges.hareb@gmail.com'),
+    ('jf10', '81/209453', 'Baalback, Kaa', 'F', 'Joelle', 'Fares', 'joelle.fares@gmail.com'),
+    ('fm02', '70/231539', 'Jbeil, Edde', 'M', 'Fouad', 'Maalouf', 'fouad.maalouf@gmail.com'),
+    ('jb01', '03/356472', 'Beirut, Verdun', 'M', 'Jad', 'Barakat', 'jad.barakat@gmail.com'),
+    ('nn12', '78/324536', 'Zahle, Ksara', 'F', 'Nour', 'Najjar', 'nour.najjar@gmail.com'),
+    ('rh17', '03/564992', 'Saida, Taameer', 'M', 'Ramzi', 'Haddad', 'ramzi.haddad@gmail.com'),
+    ('rh18', '76/172321', 'Beirut, Raouche', 'F', 'Rima', 'Halabieh', 'rima.halabieh@gmail.com'),
+    ('es02', '71/342764', 'Beirut, Verdun', 'M', 'Elie', 'Salameh', 'elie.salameh@gmail.com'),
+    ('nm01', '78/876520', 'Beirut, Hamra', 'F', 'Nadine', 'Mabsout', 'nadine.mabsout@gmail.com');
 
 INSERT INTO Library (BranchID, Address, Phone_Number) VALUES
-    ('LIBTECH01', 'Hamra', '01412344'),
-    ('LIBTECH02', 'Mazraa', '01513478'),
-    ('LIBTECH03', 'Jal El Dib', '04234432'),
-    ('LIBTECH04', 'Jounieh', '04512987'),
-    ('LIBTECH05', 'Jbeil', '08212121'),
-    ('LIBTECH06', 'Tripoli', '08787654'),
-    ('LIBTECH07', 'Zahle', '09128220'),
-    ('LIBTECH08', 'Saida', '07987098'),
-    ('LIBTECH09', 'Nabatieh', '07565890'),
-    ('LIBTECH10', 'Tyre', '07987911');
+    ('LIBTECH01', 'Hamra', '01/412344'),
+    ('LIBTECH02', 'Mazraa', '01/513478'),
+    ('LIBTECH03', 'Jal El Dib', '04/234432'),
+    ('LIBTECH04', 'Jounieh', '04/512987'),
+    ('LIBTECH05', 'Jbeil', '08/212121'),
+    ('LIBTECH06', 'Tripoli', '08/787654'),
+    ('LIBTECH07', 'Zahle', '09/128220'),
+    ('LIBTECH08', 'Saida', '07/987098'),
+    ('LIBTECH09', 'Nabatieh', '07/565890'),
+    ('LIBTECH10', 'Tyre', '07/987911');
 
 
 INSERT INTO Staff (SSN, First_Name, Last_Name, DoB, Blood_Type, Address, Salary, Post, Super_SSN, St_Email, BranchID, Hours) VALUES
@@ -69,16 +69,16 @@ INSERT INTO Dependents (SSN, Dep_Name, Relationship, Sex) VALUES
     ('901-23-4567', 'Georges', 'father', 'M');
 
 INSERT INTO Supplier (Supp_Name, Address, Phone_Number) VALUES
-    ('Najjar', 'Beirut', '01255412'),
-    ('KhouryHome', 'Beirut', '01453123'),
-    ('AbedTahhan', 'Beirut', '01879034'),
-    ('HamdanElectronics', 'Beirut', '01334455'),
-    ('DVDhome', 'Saida', '07565432'),
-    ('Maped', 'Beirut', '01776853'),
-    ('JoueClub', 'Beirut', '01212343'),
-    ('Crafts&More', 'Jounieh', '04312366'),
-    ('Virgin', 'Jounieh', '04565723'),
-    ('ReadPlus', 'Zahle', '09623657');
+    ('Najjar', 'Beirut', '01/255412'),
+    ('KhouryHome', 'Beirut', '01/453123'),
+    ('AbedTahhan', 'Beirut', '01/879034'),
+    ('HamdanElectronics', 'Beirut', '01/334455'),
+    ('DVDhome', 'Saida', '07/565432'),
+    ('Maped', 'Beirut', '01/776853'),
+    ('JoueClub', 'Beirut', '01/212343'),
+    ('Crafts&More', 'Jounieh', '04/312366'),
+    ('Virgin', 'Jounieh', '04/565723'),
+    ('ReadPlus', 'Zahle', '09/623657');
 
 
 INSERT INTO Items (Barcode, Items_Name, Age_Group, Price, Genre, Supp_Name, Supp_Address, Qty_Supplied, Date_Supplied)
@@ -96,16 +96,16 @@ VALUES
 
 INSERT INTO Publisher (Publisher_Name, Address, Phone_Number)
 VALUES
-('Dar Al-Kitaba', 'Beirut,Hamra', '03355097'),
-('Dar Al-Nour', 'Mount Lebanon,Aley', '71232156'),
-('Lebanon Readings', 'Beirut, Cola', '76876425'),
-('Dar Al-Nasher', 'Jounieh', '03436352'),
-('Today News', 'Beirut', '09824262'),
-('Dar Al-Balad', 'Saida', '81423536'),
-('Dar Al-Maarifa', 'Nabatieh', '07634562'),
-('Dar Al-Fikr', 'Tripoli', '09643225'),
-('WassupLebanon', 'Jbeil', '71232321'),
-('Dar Al-Salam', 'Beirut', '81123333');
+('Dar Al-Kitaba', 'Beirut,Hamra', '03/355097'),
+('Dar Al-Nour', 'Mount Lebanon,Aley', '71/232156'),
+('Lebanon Readings', 'Beirut, Cola', '76/876425'),
+('Dar Al-Nasher', 'Jounieh', '03/436352'),
+('Today News', 'Beirut', '09/824262'),
+('Dar Al-Balad', 'Saida', '81/423536'),
+('Dar Al-Maarifa', 'Nabatieh', '07/634562'),
+('Dar Al-Fikr', 'Tripoli', '09/643225'),
+('WassupLebanon', 'Jbeil', '71/232321'),
+('Dar Al-Salam', 'Beirut', '81/123333');
 
 INSERT INTO Books_for_Sale (ISBN, Title, Genre, Price, Translator, Edition, Pages, Lang, Publisher_Name)
 VALUES
@@ -229,16 +229,16 @@ VALUES
 
 INSERT INTO Sale_to_Rent (BookID, ISBN, Date_Moved, Discount)
 VALUES
-    ('0000000002431#001', '0000000002431', '2024-10-10', 35),
-    ('0000000003421#012', '0000000003421', '2024-10-11', 35),
-    ('0000000004562#012', '0000000004562', '2024-10-12', 35),
-    ('0000000004989#023', '0000000004989', '2024-09-30', 35),
-    ('0000000005232#003', '0000000005232', '2024-09-29', 35),
-    ('0000000005900#002', '0000000005900', '2024-10-17', 35),
-    ('0000000006113#020', '0000000006113', '2024-09-27', 35),
-    ('0000000006772#012', '0000000006772', '2024-08-31', 35),
-    ('0000000007880#001', '0000000007880', '2024-08-30', 35),
-    ('0000000007994#010', '0000000007994', '2024-08-23', 35);
+    ('0000000002431#001', '0000000002431', '2024-10-10', 35.00),
+    ('0000000003421#012', '0000000003421', '2024-10-11', 35.00),
+    ('0000000004562#012', '0000000004562', '2024-10-12', 35.00),
+    ('0000000004989#023', '0000000004989', '2024-09-30', 35.00),
+    ('0000000005232#003', '0000000005232', '2024-09-29', 35.00),
+    ('0000000005900#002', '0000000005900', '2024-10-17', 35.00),
+    ('0000000006113#020', '0000000006113', '2024-09-27', 35.00),
+    ('0000000006772#012', '0000000006772', '2024-08-31', 35.00),
+    ('0000000007880#001', '0000000007880', '2024-08-30', 35.00),
+    ('0000000007994#010', '0000000007994', '2024-08-23', 35.00);
 
 
 
