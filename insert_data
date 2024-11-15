@@ -23,7 +23,7 @@ INSERT INTO Authentication_System (Email, Passcode) VALUES
 INSERT INTO Customer (Username, Phone_Number, Address, Sex, First_Name, Last_Name, Ct_Email) VALUES
     ('en01', '71812354', 'Tripoli, Mina', 'M', 'Elias', 'Nasr', 'elias.nasr@gmail.com'),
     ('gh21', '76123765', 'Baabda, Hazmieh', 'M', 'Georges', 'Hareb', 'georges.hareb@gmail.com'),
-    ('jf10', '81209453', 'BaaLIBTECHack, Kaa', 'F', 'Joelle', 'Fares', 'joelle.fares@gmail.com'),
+    ('jf10', '81209453', 'Baalback, Kaa', 'F', 'Joelle', 'Fares', 'joelle.fares@gmail.com'),
     ('fm02', '70231539', 'Jbeil, Edde', 'M', 'Fouad', 'Maalouf', 'fouad.maalouf@gmail.com'),
     ('jb01', '03356472', 'Beirut, Verdun', 'M', 'Jad', 'Barakat', 'jad.barakat@gmail.com'),
     ('nn12', '78324536', 'Zahle, Ksara', 'F', 'Nour', 'Najjar', 'nour.najjar@gmail.com'),
