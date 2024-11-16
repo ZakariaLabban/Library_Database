@@ -1,9 +1,141 @@
 Hamdan:
 
+View1: Top-Spending Customers
+Code:
+CREATE VIEW Top_Spending_Customers AS
+SELECT 
+    c.Username, 
+    c.First_Name, 
+    c.Last_Name, 
+    SUM(p.Quantity * i.Price) AS Total_Spent
+FROM 
+    Purchases_Items p
+JOIN 
+    Items i ON p.Barcode = i.Barcode
+JOIN 
+    Customer c ON p.Username = c.Username
+GROUP BY 
+    c.Username, c.First_Name, c.Last_Name
+ORDER BY 
+    Total_Spent DESC;
+
+
+View2: Total Working Hours by Staff in Each Branch
+Code:
+REATE VIEW Staff_Working_Hours AS
+SELECT 
+    s.BranchID, 
+    s.SSN, 
+    s.First_Name, 
+    s.Last_Name, 
+    s.Hours AS Total_Hours
+FROM 
+    Staff s
+WHERE 
+    s.Hours > 0
+ORDER BY 
+    s.BranchID, s.Total_Hours DESC;
+
+
+Trigger: Prevent Stock from Going Negative in Branch Inventory
+Code:
+CREATE OR REPLACE FUNCTION prevent_negative_stock()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.Qty_Stored < 0 THEN
+        RAISE EXCEPTION 'Stock cannot be negative for item % in branch %', NEW.Barcode, NEW.BranchID;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_prevent_negative_stock
+BEFORE INSERT OR UPDATE ON Stores_Items
+FOR EACH ROW
+EXECUTE FUNCTION prevent_negative_stock();
+
+
+
+
+Function: Get Total Sales by Customer
+Code:
+CREATE OR REPLACE FUNCTION total_sales_by_customer(username_input VARCHAR)
+RETURNS NUMERIC AS $$
+DECLARE
+    total_sales NUMERIC := 0;
+BEGIN
+    SELECT SUM(bb.Quantity * bs.Price) 
+    INTO total_sales
+    FROM Buys_Books bb
+    JOIN Books_for_Sale bs ON bb.ISBN = bs.ISBN
+    WHERE bb.Username = username_input;
+
+    RETURN COALESCE(total_sales, 0); -- Returns 0 if no purchases are found
+END;
+$$ LANGUAGE plpgsql;
+
+
+example: SELECT total_sales_by_customer('en01');
+
+
+
+
+Stored Procedure: Transfer Book Stock Between Branches
+Code:
+CREATE OR REPLACE PROCEDURE transfer_book_stock(
+    from_branch VARCHAR,
+    to_branch VARCHAR,
+    isbn CHAR(13),
+    transfer_quantity INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    -- Check if the from_branch has enough stock
+    IF NOT EXISTS (
+        SELECT 1 
+        FROM Stores_Booksforsale 
+        WHERE BranchID = from_branch AND ISBN = isbn AND Number_of_Copies >= transfer_quantity
+    ) THEN
+        RAISE EXCEPTION 'Insufficient stock in branch % for book %', from_branch, isbn;
+    END IF;
+
+    -- Deduct stock from from_branch
+    UPDATE Stores_Booksforsale
+    SET Number_of_Copies = Number_of_Copies - transfer_quantity
+    WHERE BranchID = from_branch AND ISBN = isbn;
+
+    -- Add stock to to_branch
+    INSERT INTO Stores_Booksforsale (BranchID, ISBN, Number_of_Copies)
+    VALUES (to_branch, isbn, transfer_quantity)
+    ON CONFLICT (BranchID, ISBN) 
+    DO UPDATE SET Number_of_Copies = Stores_Booksforsale.Number_of_Copies + transfer_quantity;
+END;
+$$;
+
+
+example: CALL transfer_book_stock('LIBTECH01', 'LIBTECH02', '1234567890123', 5);
+
+
+
 
 
 Tia:
 
+View1: -- please write the first view query
+Code:
 
+--please write is code here
+
+
+-- please follow the same format for the remaining views/ triggers, etc (Check hamdan's part)
 
 Zak:
+
+View1: -- please write the first view query
+Code:
+
+--please write is code here
+
+
+-- please follow the same format for the remaining views/ triggers, etc (check hamdan's part)
