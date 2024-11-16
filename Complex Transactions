@@ -1,9 +1,109 @@
 Hamdan:
 
+Q1: Customers Who Spent the Most on Purchases
+Code: 
+SELECT c.Username, c.First_Name, c.Last_Name, SUM(p.Quantity * i.Price) AS Total_Spent
+FROM Purchases_Items p
+JOIN Items i ON p.Barcode = i.Barcode
+JOIN Customer c ON p.Username = c.Username
+GROUP BY c.Username, c.First_Name, c.Last_Name
+ORDER BY Total_Spent DESC
+LIMIT 10;
 
 
-Tia:
+Q2:Identify Top 5 Borrowed Books in the Last Year
+Code:
+SELECT br.Title, COUNT(b.BookID) AS Borrow_Count
+FROM Borrows b
+JOIN Books_for_Rent br ON b.BookID = br.BookID
+WHERE b.Date_Out >= CURRENT_DATE - INTERVAL '1 year'
+GROUP BY br.Title
+ORDER BY Borrow_Count DESC
+LIMIT 5;
 
+Q3: List Customers Who Have Unreturned Books Past Due Date
+Code:
+SELECT c.Username, c.First_Name, c.Last_Name, b.BookID, br.Title, b.Due_Date, 
+       (CURRENT_DATE - b.Due_Date) * 0.5 AS Fine_Amount
+FROM Borrows b
+JOIN Customer c ON b.Username = c.Username
+JOIN Books_for_Rent br ON b.BookID = br.BookID
+WHERE b.Due_Date < CURRENT_DATE AND b.Penalty = 0;
+
+Q4: Analyze Revenue from Book Sales in a Specific Branch
+Code:
+SELECT lb.BranchID, SUM(bb.Quantity * bs.Price) AS Total_Revenue
+FROM Buys_Books bb
+JOIN Books_for_Sale bs ON bb.ISBN = bs.ISBN
+JOIN Libraryy lb ON bb.BranchID = lb.BranchID
+WHERE lb.BranchID = 'LIBTECH01'
+GROUP BY lb.BranchID;
+
+Q5: Find Books Moved from Sale to Rent with Discounts Over 50%
+Code:
+SELECT st.BookID, st.ISBN, st.Date_Moved, st.Discount, br.Title
+FROM Sale_to_Rent st
+JOIN Books_for_Rent br ON st.BookID = br.BookID
+WHERE st.Discount > 50;
+
+Q6: Determine Stock Levels of Items in All Branches
+Code:
+SELECT si.BranchID, i.Items_Name, SUM(si.Qty_Stored) AS Total_Stock
+FROM Stores_Items si
+JOIN Items i ON si.Barcode = i.Barcode
+GROUP BY si.BranchID, i.Items_Name
+ORDER BY Total_Stock ASC;
+
+Q7: Check Which Authors Have Published the Most Books
+Code:
+SELECT ab.Author_Name, COUNT(ab.ISBN) AS Published_Books
+FROM Authors_BookSale ab
+GROUP BY ab.Author_Name
+ORDER BY Published_Books DESC;
+
+Q8: Branch with the Highest Number of Rentals
+Code: 
+SELECT b.BranchID, COUNT(br.BookID) AS Rentals_Count
+FROM Borrows br
+JOIN Books_for_Rent b ON br.BookID = b.BookID
+GROUP BY b.BranchID
+ORDER BY Rentals_Count DESC
+LIMIT 1;
+
+Q9: Monthly Breakdown of Supplier Deliveries
+Code: 
+SELECT TO_CHAR(i.Date_Supplied, 'YYYY-MM') AS Supply_Month, s.Supp_Name, 
+       SUM(i.Qty_Supplied) AS Total_Delivered
+FROM Items i
+JOIN Supplier s ON i.Supp_Name = s.Supp_Name
+GROUP BY TO_CHAR(i.Date_Supplied, 'YYYY-MM'), s.Supp_Name
+ORDER BY Supply_Month DESC;
+
+Q10:Books and Items Frequently Bought Together
+Code: 
+SELECT bb.ISBN, i.Barcode, COUNT(*) AS Frequency
+FROM Buys_Books bb
+JOIN Purchases_Items pi ON bb.Username = pi.Username
+WHERE bb.Date_Time::date = pi.Date_Time::date
+GROUP BY bb.ISBN, i.Barcode
+ORDER BY Frequency DESC;
+
+
+
+Tia: 
+
+Q1:         --please write the first query here
+Code:
+--- please write its code here
+
+---follow this format for remaining queries (check hamdan's part)
 
 
 Zak:
+
+
+Q1:         --please write the first query here
+Code:
+--- please write its code here
+
+---follow this format for remaining queries (check hamdan's part)
