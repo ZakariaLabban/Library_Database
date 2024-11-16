@@ -119,17 +119,14 @@ GROUP BY
 
 Q2: List staff who have worked more than 10% above the average hours across all branches.
 Code:
-WITH Avg_Hours AS (
-    SELECT AVG(Hours) AS Avg_Hours FROM Staff
-)
 SELECT 
     First_Name, 
     Last_Name, 
     Hours
 FROM 
-    Staff, Avg_Hours
+    Staff
 WHERE 
-    Hours > Avg_Hours.Avg_Hours * 1.1;
+    Hours > (SELECT AVG(Hours) FROM Staff) * 1.1;
 
 
 
