@@ -1,86 +1,147 @@
-Hamdan:
+VIEWS:
 
-View1: Top-Spending Customers
+View 1: This view provides a summary of items supplied by each supplier along with the total quantity supplied
+Code: 
+CREATE VIEW Supplier_Supply_Summary AS
+SELECT 
+    s.Supp_Name, 
+    i.Items_Name, 
+    SUM(i.Qty_Supplied) AS Total_Supplied
+FROM 
+    Items i
+JOIN 
+    Supplier s ON i.Supp_Name = s.Supp_Name
+GROUP BY 
+    s.Supp_Name, i.Items_Name
+ORDER BY 
+    s.Supp_Name;
+
+View2: --Customers With Outstanding Penalties
 Code:
-CREATE VIEW Top_Spending_Customers AS
+CREATE VIEW Customers_With_Penalties AS
 SELECT 
     c.Username, 
     c.First_Name, 
     c.Last_Name, 
-    SUM(p.Quantity * i.Price) AS Total_Spent
+    SUM(br.Penalty) AS Total_Penalty
 FROM 
-    Purchases_Items p
+    Borrows br
 JOIN 
-    Items i ON p.Barcode = i.Barcode
-JOIN 
-    Customer c ON p.Username = c.Username
+    Customer c ON br.Username = c.Username
+WHERE 
+    br.Penalty > 0
 GROUP BY 
     c.Username, c.First_Name, c.Last_Name
 ORDER BY 
-    Total_Spent DESC;
+    Total_Penalty DESC;
+Test Case:
+SELECT * FROM Customers_With_Penalties;
 
+Triggers:
 
-View2: Total Working Hours by Staff in Each Branch
+Trigger1: Automatically Update the Quantity of Books for Sale After a Purchase
 Code:
-CREATE VIEW Staff_Working_Hours AS
-SELECT 
-    s.BranchID, 
-    s.SSN, 
-    s.First_Name, 
-    s.Last_Name, 
-    s.Hours AS Total_Hours
-FROM 
-    Staff s
-WHERE 
-    s.Hours > 0
-ORDER BY 
-    s.BranchID, Total_Hours DESC;
-
-
-Trigger: Prevent Stock from Going Negative in Branch Inventory
-Code:
-CREATE OR REPLACE FUNCTION prevent_negative_stock()
+CREATE OR REPLACE FUNCTION update_book_stock()
 RETURNS TRIGGER AS $$
 BEGIN
-    IF NEW.Qty_Stored < 0 THEN
-        RAISE EXCEPTION 'Stock cannot be negative for item % in branch %', NEW.Barcode, NEW.BranchID;
+    -- Check if the number of copies in stock will become negative
+    IF (SELECT Number_of_Copies FROM Stores_Booksforsale 
+        WHERE BranchID = NEW.BranchID AND ISBN = NEW.ISBN) < NEW.Quantity THEN
+        RAISE EXCEPTION 'Not enough copies in stock for ISBN % in branch %', NEW.ISBN, NEW.BranchID;
     END IF;
+    
+    -- Update the stock after a successful purchase
+    UPDATE Stores_Booksforsale
+    SET Number_of_Copies = Number_of_Copies - NEW.Quantity
+    WHERE BranchID = NEW.BranchID AND ISBN = NEW.ISBN;
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_prevent_negative_stock
-BEFORE INSERT OR UPDATE ON Stores_Items
+CREATE TRIGGER trigger_update_book_stock
+AFTER INSERT ON Buys_Books
 FOR EACH ROW
-EXECUTE FUNCTION prevent_negative_stock();
+EXECUTE FUNCTION update_book_stock();
 
-
-
-
-Function: Get Total Sales by Customer
+Trigger2: --Prevent a user from borrowing a new book if they have outstanding penalties in the Borrows table.
 Code:
-CREATE OR REPLACE FUNCTION total_sales_by_customer(username_input VARCHAR)
-RETURNS NUMERIC AS $$
-DECLARE
-    total_sales NUMERIC := 0;
+CREATE OR REPLACE FUNCTION prevent_borrow_with_penalty()
+RETURNS TRIGGER AS $$
 BEGIN
-    SELECT SUM(bb.Quantity * bs.Price) 
-    INTO total_sales
-    FROM Buys_Books bb
-    JOIN Books_for_Sale bs ON bb.ISBN = bs.ISBN
-    WHERE bb.Username = username_input;
+    -- Check for outstanding penalties
+    IF EXISTS (
+        SELECT 1
+        FROM Borrows
+        WHERE Username = NEW.Username AND Penalty > 0
+    ) THEN
+        RAISE EXCEPTION 'User % has outstanding penalties and cannot borrow a new book', NEW.Username;
+    END IF;
 
-    RETURN COALESCE(total_sales, 0); -- Returns 0 if no purchases are found
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER trigger_prevent_borrow_with_penalty
+BEFORE INSERT ON Borrows
+FOR EACH ROW
+EXECUTE FUNCTION prevent_borrow_with_penalty();
+
+FUNCTIONS:
+
+Function1: This function checks whether a specific book (based on its Name) is available in a given branch and returns the number of copies available.
+Code:
+CREATE OR REPLACE FUNCTION check_book_availability(Title_input TEXT, branch_id_input VARCHAR)
+RETURNS TEXT AS $$
+DECLARE
+    book_title TEXT;
+BEGIN
+    SELECT bs.Title
+    INTO book_title
+    FROM Books_for_Sale bs
+    JOIN Stores_Booksforsale sb ON bs.ISBN = sb.ISBN
+    WHERE bs.Title = Title_input AND sb.BranchID = branch_id_input;
+
+    RETURN book_title; -- Returns the title if the book is available
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN 'Book not available';
 END;
 $$ LANGUAGE plpgsql;
 
 
-example: SELECT total_sales_by_customer('en01');
+Example usage:
+SELECT check_book_availability('Electronics', 'LIBTECH01');
+
+Function2: --Calculate Total Inventory Value for a Branch
+Code:
+CREATE OR REPLACE FUNCTION total_inventory_value(branch_id VARCHAR)
+RETURNS NUMERIC AS $$
+DECLARE
+    total_value NUMERIC := 0;
+BEGIN
+    SELECT 
+        COALESCE(SUM(bfs.Price * sb.Number_of_Copies), 0) +
+        COALESCE(SUM(i.Price * si.Qty_Stored), 0)
+    INTO total_value
+    FROM 
+        Libraryy l
+    LEFT JOIN Stores_Booksforsale sb ON l.BranchID = sb.BranchID
+    LEFT JOIN Books_for_Sale bfs ON sb.ISBN = bfs.ISBN
+    LEFT JOIN Stores_Items si ON l.BranchID = si.BranchID
+    LEFT JOIN Items i ON si.Barcode = i.Barcode
+    WHERE l.BranchID = branch_id;
+
+    RETURN total_value;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Example usage:
+-- SELECT total_inventory_value('LIBTECH01');
 
 
 
 
-Stored Procedure: Transfer Book Stock Between Branches
+Stored Procedure1: Transfer Book Stock Between Branches
 Code:
 CREATE OR REPLACE PROCEDURE transfer_book_stock(
     from_branch VARCHAR,
@@ -120,257 +181,3 @@ example: CALL transfer_book_stock('LIBTECH01', 'LIBTECH02', '0000000003421', 5);
 
 
 
-Tia:
-
-View1: This view lists all books available for sale, categorized by genre along with their prices.
-Code:
-CREATE VIEW Books_Available_For_Sale AS
-SELECT 
-    bs.ISBN, 
-    bs.Title, 
-    bs.Genre, 
-    bs.Price, 
-    bs.Edition, 
-    bs.Lang, 
-    p.Publisher_Name
-FROM 
-    Books_for_Sale bs
-JOIN 
-    Publisher p ON bs.Publisher_Name = p.Publisher_Name
-ORDER BY 
-    bs.Genre, bs.Price DESC;
-
-View 2: This view provides a summary of items supplied by each supplier along with the total quantity supplied
-Code: 
-CREATE VIEW Supplier_Supply_Summary AS
-SELECT 
-    s.Supp_Name, 
-    i.Items_Name, 
-    SUM(i.Qty_Supplied) AS Total_Supplied
-FROM 
-    Items i
-JOIN 
-    Supplier s ON i.Supp_Name = s.Supp_Name
-GROUP BY 
-    s.Supp_Name, i.Items_Name
-ORDER BY 
-    s.Supp_Name;
-
-
-Trigger: Automatically Update the Quantity of Books for Sale After a Purchase
-Code:
-CREATE OR REPLACE FUNCTION update_book_stock()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Check if the number of copies in stock will become negative
-    IF (SELECT Number_of_Copies FROM Stores_Booksforsale 
-        WHERE BranchID = NEW.BranchID AND ISBN = NEW.ISBN) < NEW.Quantity THEN
-        RAISE EXCEPTION 'Not enough copies in stock for ISBN % in branch %', NEW.ISBN, NEW.BranchID;
-    END IF;
-    
-    -- Update the stock after a successful purchase
-    UPDATE Stores_Booksforsale
-    SET Number_of_Copies = Number_of_Copies - NEW.Quantity
-    WHERE BranchID = NEW.BranchID AND ISBN = NEW.ISBN;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_update_book_stock
-AFTER INSERT ON Buys_Books
-FOR EACH ROW
-EXECUTE FUNCTION update_book_stock();
-
-
-Function: This function checks whether a specific book (based on its ISBN) is available in a given branch and returns the number of copies available.
-Code:
-CREATE OR REPLACE FUNCTION check_book_availability(isbn_input CHAR(13), branch_id_input VARCHAR)
-RETURNS INTEGER AS $$
-DECLARE
-    available_copies INTEGER := 0;
-BEGIN
-    SELECT Number_of_Copies
-    INTO available_copies
-    FROM Stores_Booksforsale
-    WHERE ISBN = isbn_input AND BranchID = branch_id_input;
-
-    RETURN COALESCE(available_copies, 0); -- Returns 0 if the book is not available
-END;
-$$ LANGUAGE plpgsql;
-
-Example usage:
-SELECT check_book_availability('0000000002431', 'LIBTECH01');
-
-Stored Procedure: This stored procedure updates the stock level in the Stores_Booksforsale table when a customer purchases a book. It checks if enough stock is available before making the purchase and updates the quantity if successful.
-Code:
-CREATE OR REPLACE PROCEDURE purchase_book(
-    customer_username VARCHAR,
-    book_isbn CHAR(13),
-    branch_id VARCHAR,
-    purchase_quantity INT
-)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-    available_copies INT;
-BEGIN
-    -- Check if the specified branch has enough copies of the book
-    SELECT Number_of_Copies INTO available_copies
-    FROM Stores_Booksforsale
-    WHERE BranchID = branch_id AND ISBN = book_isbn;
-
-    -- If no stock is available or the quantity is insufficient, raise an error
-    IF available_copies IS NULL OR available_copies < purchase_quantity THEN
-        RAISE EXCEPTION 'Insufficient stock in branch % for book %', branch_id, book_isbn;
-    END IF;
-
-    -- Deduct the purchased quantity from the available stock
-    UPDATE Stores_Booksforsale
-    SET Number_of_Copies = Number_of_Copies - purchase_quantity
-    WHERE BranchID = branch_id AND ISBN = book_isbn;
-
-    -- Insert a record into the Buys_Books table to log the purchase
-    INSERT INTO Buys_Books (Username, BranchID, ISBN, Quantity, Date_Time)
-    VALUES (customer_username, branch_id, book_isbn, purchase_quantity, NOW());
-
-    -- Notify the user of a successful purchase
-    RAISE NOTICE 'Book % purchased by customer % at branch %', book_isbn, customer_username, branch_id;
-END;
-$$;
-
-Example:
-CALL purchase_book('en01', '0000000002431', 'LIBTECH01', 2);
-
-
-
-
-Zak:
-
-
-
-View1: --Most Borrowed Books by Branch
-Code:
-CREATE VIEW Most_Borrowed_Books AS
-SELECT 
-    bfr.BranchID,
-    bfr.Title,
-    COUNT(br.BookID) AS Times_Borrowed
-FROM 
-    Borrows br
-JOIN 
-    Books_for_Rent bfr ON br.BookID = bfr.BookID
-GROUP BY 
-    bfr.BranchID, bfr.Title
-ORDER BY 
-    bfr.BranchID, Times_Borrowed DESC;
-Test Case:
-SELECT * FROM Most_Borrowed_Books;
-
-View2: --Customers With Outstanding Penalties
-Code:
-CREATE VIEW Customers_With_Penalties AS
-SELECT 
-    c.Username, 
-    c.First_Name, 
-    c.Last_Name, 
-    SUM(br.Penalty) AS Total_Penalty
-FROM 
-    Borrows br
-JOIN 
-    Customer c ON br.Username = c.Username
-WHERE 
-    br.Penalty > 0
-GROUP BY 
-    c.Username, c.First_Name, c.Last_Name
-ORDER BY 
-    Total_Penalty DESC;
-Test Case:
-SELECT * FROM Customers_With_Penalties;
-
-
-
-Trigger: --Prevent a user from borrowing a new book if they have outstanding penalties in the Borrows table.
-Code:
-CREATE OR REPLACE FUNCTION prevent_borrow_with_penalty()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Check for outstanding penalties
-    IF EXISTS (
-        SELECT 1
-        FROM Borrows
-        WHERE Username = NEW.Username AND Penalty > 0
-    ) THEN
-        RAISE EXCEPTION 'User % has outstanding penalties and cannot borrow a new book', NEW.Username;
-    END IF;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-CREATE TRIGGER trigger_prevent_borrow_with_penalty
-BEFORE INSERT ON Borrows
-FOR EACH ROW
-EXECUTE FUNCTION prevent_borrow_with_penalty();
-
-
-Function: --Calculate Total Inventory Value for a Branch
-Code:
-CREATE OR REPLACE FUNCTION total_inventory_value(branch_id VARCHAR)
-RETURNS NUMERIC AS $$
-DECLARE
-    total_value NUMERIC := 0;
-BEGIN
-    SELECT 
-        COALESCE(SUM(bfs.Price * sb.Number_of_Copies), 0) +
-        COALESCE(SUM(i.Price * si.Qty_Stored), 0)
-    INTO total_value
-    FROM 
-        Libraryy l
-    LEFT JOIN Stores_Booksforsale sb ON l.BranchID = sb.BranchID
-    LEFT JOIN Books_for_Sale bfs ON sb.ISBN = bfs.ISBN
-    LEFT JOIN Stores_Items si ON l.BranchID = si.BranchID
-    LEFT JOIN Items i ON si.Barcode = i.Barcode
-    WHERE l.BranchID = branch_id;
-
-    RETURN total_value;
-END;
-$$ LANGUAGE plpgsql;
-
--- Example usage:
--- SELECT total_inventory_value('LIBTECH01');
-
-Stored Procedure: --Promote a Librarian to Manager
-Code:
-CREATE OR REPLACE PROCEDURE promote_to_manager(
-    staff_ssn VARCHAR,
-    branch_id VARCHAR
-)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    -- Ensure the staff is a librarian
-    IF NOT EXISTS (
-        SELECT 1 
-        FROM Staff 
-        WHERE SSN = staff_ssn AND Post = 'Librarian' AND BranchID = branch_id
-    ) THEN
-        RAISE EXCEPTION 'Staff with SSN % is not a librarian in branch %', staff_ssn, branch_id;
-    END IF;
-
-    -- Update the staff's post to Manager
-    UPDATE Staff
-    SET Post = 'Manager', Super_SSN = NULL
-    WHERE SSN = staff_ssn;
-
-    RAISE NOTICE 'Staff with SSN % has been promoted to Manager for branch %', staff_ssn, branch_id;
-END;
-$$;
-
--- Example usage:
--- CALL promote_to_manager('345-67-8901', 'LIBTECH01');
-
-
-
-
-
--- please follow the same format for the remaining views/ triggers, etc (check hamdan's part)
