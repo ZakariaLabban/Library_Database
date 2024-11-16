@@ -92,11 +92,34 @@ ORDER BY Frequency DESC;
 
 Tia: 
 
-Q1:         --please write the first query here
+Q1: Retrieve the total amount each customer has spent on book purchases and item purchases, along with their most frequently visited branch.
 Code:
---- please write its code here
+SELECT 
+    c.Username,
+    c.First_Name,
+    c.Last_Name,
+    COALESCE(SUM(b.Quantity * bs.Price), 0) AS Total_Book_Spending,
+    COALESCE(SUM(i.Quantity * it.Price), 0) AS Total_Item_Spending,
+    (SELECT BranchID 
+     FROM Buys_Books b2 
+     WHERE b2.Username = c.Username 
+     GROUP BY BranchID 
+     ORDER BY COUNT(*) DESC 
+     LIMIT 1) AS Favorite_Branch
+FROM 
+    Customer c
+LEFT JOIN Buys_Books b ON c.Username = b.Username
+LEFT JOIN Books_for_Sale bs ON b.ISBN = bs.ISBN
+LEFT JOIN Purchases_Items i ON c.Username = i.Username
+LEFT JOIN Items it ON i.Barcode = it.Barcode
+GROUP BY 
+    c.Username, c.First_Name, c.Last_Name;
 
----follow this format for remaining queries (check hamdan's part)
+
+
+Q2:
+Code:
+
 
 
 Zak:
