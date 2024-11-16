@@ -202,6 +202,46 @@ $$ LANGUAGE plpgsql;
 Example usage:
 SELECT check_book_availability('0000000002431', 'LIBTECH01');
 
+Stored Procedure: This stored procedure updates the stock level in the Stores_Booksforsale table when a customer purchases a book. It checks if enough stock is available before making the purchase and updates the quantity if successful.
+Code:
+CREATE OR REPLACE PROCEDURE purchase_book(
+    customer_username VARCHAR,
+    book_isbn CHAR(13),
+    branch_id VARCHAR,
+    purchase_quantity INT
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    available_copies INT;
+BEGIN
+    -- Check if the specified branch has enough copies of the book
+    SELECT Number_of_Copies INTO available_copies
+    FROM Stores_Booksforsale
+    WHERE BranchID = branch_id AND ISBN = book_isbn;
+
+    -- If no stock is available or the quantity is insufficient, raise an error
+    IF available_copies IS NULL OR available_copies < purchase_quantity THEN
+        RAISE EXCEPTION 'Insufficient stock in branch % for book %', branch_id, book_isbn;
+    END IF;
+
+    -- Deduct the purchased quantity from the available stock
+    UPDATE Stores_Booksforsale
+    SET Number_of_Copies = Number_of_Copies - purchase_quantity
+    WHERE BranchID = branch_id AND ISBN = book_isbn;
+
+    -- Insert a record into the Buys_Books table to log the purchase
+    INSERT INTO Buys_Books (Username, BranchID, ISBN, Quantity, Date_Time)
+    VALUES (customer_username, branch_id, book_isbn, purchase_quantity, NOW());
+
+    -- Notify the user of a successful purchase
+    RAISE NOTICE 'Book % purchased by customer % at branch %', book_isbn, customer_username, branch_id;
+END;
+$$;
+
+Example:
+CALL purchase_book('en01', '0000000002431', 'LIBTECH01', 2);
+
 
 
 
