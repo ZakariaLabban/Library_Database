@@ -154,6 +154,26 @@ FROM
     Customer_Spend;
 -- COALESCE Ensures that if either SUM() returns NULL, it defaults to 0 instead, preventing null values from affecting the result.
 
+Q4: Find the top 5 suppliers who generated the most revenue from their items.
+Code:
+SELECT 
+    s.Supp_Name, 
+    SUM(i.Price * p.Quantity) AS Total_Revenue
+FROM 
+    Purchases_Items p
+JOIN 
+    Items i ON p.Barcode = i.Barcode
+JOIN 
+    Supplier s ON i.Supp_Name = s.Supp_Name
+GROUP BY 
+    s.Supp_Name
+ORDER BY 
+    Total_Revenue DESC
+LIMIT 2;
+
+
+
+
 
 
 
