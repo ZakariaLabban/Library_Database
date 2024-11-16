@@ -183,6 +183,24 @@ FOR EACH ROW
 EXECUTE FUNCTION update_book_stock();
 
 
+Function: This function checks whether a specific book (based on its ISBN) is available in a given branch and returns the number of copies available.
+Code:
+CREATE OR REPLACE FUNCTION check_book_availability(isbn_input CHAR(13), branch_id_input VARCHAR)
+RETURNS INTEGER AS $$
+DECLARE
+    available_copies INTEGER := 0;
+BEGIN
+    SELECT Number_of_Copies
+    INTO available_copies
+    FROM Stores_Booksforsale
+    WHERE ISBN = isbn_input AND BranchID = branch_id_input;
+
+    RETURN COALESCE(available_copies, 0); -- Returns 0 if the book is not available
+END;
+$$ LANGUAGE plpgsql;
+
+Example usage:
+SELECT check_book_availability('0000000002431', 'LIBTECH01');
 
 
 
