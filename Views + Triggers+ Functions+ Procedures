@@ -85,7 +85,7 @@ Code:
 CREATE OR REPLACE PROCEDURE transfer_book_stock(
     from_branch VARCHAR,
     to_branch VARCHAR,
-    isbn CHAR(13),
+    book_isbn CHAR(13), -- Renamed parameter to avoid conflict
     transfer_quantity INT
 )
 LANGUAGE plpgsql
@@ -95,26 +95,26 @@ BEGIN
     IF NOT EXISTS (
         SELECT 1 
         FROM Stores_Booksforsale 
-        WHERE BranchID = from_branch AND ISBN = isbn AND Number_of_Copies >= transfer_quantity
+        WHERE BranchID = from_branch AND ISBN = book_isbn AND Number_of_Copies >= transfer_quantity
     ) THEN
-        RAISE EXCEPTION 'Insufficient stock in branch % for book %', from_branch, isbn;
+        RAISE EXCEPTION 'Insufficient stock in branch % for book %', from_branch, book_isbn;
     END IF;
 
     -- Deduct stock from from_branch
     UPDATE Stores_Booksforsale
     SET Number_of_Copies = Number_of_Copies - transfer_quantity
-    WHERE BranchID = from_branch AND ISBN = isbn;
+    WHERE BranchID = from_branch AND ISBN = book_isbn;
 
     -- Add stock to to_branch
     INSERT INTO Stores_Booksforsale (BranchID, ISBN, Number_of_Copies)
-    VALUES (to_branch, isbn, transfer_quantity)
+    VALUES (to_branch, book_isbn, transfer_quantity)
     ON CONFLICT (BranchID, ISBN) 
     DO UPDATE SET Number_of_Copies = Stores_Booksforsale.Number_of_Copies + transfer_quantity;
 END;
 $$;
 
 
-example: CALL transfer_book_stock('LIBTECH01', 'LIBTECH02', '1234567890123', 5);
+example: CALL transfer_book_stock('LIBTECH01', 'LIBTECH02', '0000000003421', 5);
 
 
 
