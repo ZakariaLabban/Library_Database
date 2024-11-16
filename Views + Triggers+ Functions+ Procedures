@@ -247,10 +247,130 @@ CALL purchase_book('en01', '0000000002431', 'LIBTECH01', 2);
 
 Zak:
 
-View1: -- please write the first view query
-Code:
 
---please write is code here
+
+View1: --Most Borrowed Books by Branch
+Code:
+CREATE VIEW Most_Borrowed_Books AS
+SELECT 
+    bfr.BranchID,
+    bfr.Title,
+    COUNT(br.BookID) AS Times_Borrowed
+FROM 
+    Borrows br
+JOIN 
+    Books_for_Rent bfr ON br.BookID = bfr.BookID
+GROUP BY 
+    bfr.BranchID, bfr.Title
+ORDER BY 
+    bfr.BranchID, Times_Borrowed DESC;
+Test Case:
+SELECT * FROM Most_Borrowed_Books;
+
+View2: --Customers With Outstanding Penalties
+Code:
+CREATE VIEW Customers_With_Penalties AS
+SELECT 
+    c.Username, 
+    c.First_Name, 
+    c.Last_Name, 
+    SUM(br.Penalty) AS Total_Penalty
+FROM 
+    Borrows br
+JOIN 
+    Customer c ON br.Username = c.Username
+WHERE 
+    br.Penalty > 0
+GROUP BY 
+    c.Username, c.First_Name, c.Last_Name
+ORDER BY 
+    Total_Penalty DESC;
+Test Case:
+SELECT * FROM Customers_With_Penalties;
+
+
+
+Trigger: --Prevent a user from borrowing a new book if they have outstanding penalties in the Borrows table.
+Code:
+CREATE OR REPLACE FUNCTION prevent_borrow_with_penalty()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check for outstanding penalties
+    IF EXISTS (
+        SELECT 1
+        FROM Borrows
+        WHERE Username = NEW.Username AND Penalty > 0
+    ) THEN
+        RAISE EXCEPTION 'User % has outstanding penalties and cannot borrow a new book', NEW.Username;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER trigger_prevent_borrow_with_penalty
+BEFORE INSERT ON Borrows
+FOR EACH ROW
+EXECUTE FUNCTION prevent_borrow_with_penalty();
+
+
+Function: --Calculate Total Inventory Value for a Branch
+Code:
+CREATE OR REPLACE FUNCTION total_inventory_value(branch_id VARCHAR)
+RETURNS NUMERIC AS $$
+DECLARE
+    total_value NUMERIC := 0;
+BEGIN
+    SELECT 
+        COALESCE(SUM(bfs.Price * sb.Number_of_Copies), 0) +
+        COALESCE(SUM(i.Price * si.Qty_Stored), 0)
+    INTO total_value
+    FROM 
+        Libraryy l
+    LEFT JOIN Stores_Booksforsale sb ON l.BranchID = sb.BranchID
+    LEFT JOIN Books_for_Sale bfs ON sb.ISBN = bfs.ISBN
+    LEFT JOIN Stores_Items si ON l.BranchID = si.BranchID
+    LEFT JOIN Items i ON si.Barcode = i.Barcode
+    WHERE l.BranchID = branch_id;
+
+    RETURN total_value;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Example usage:
+-- SELECT total_inventory_value('LIBTECH01');
+
+Stored Procedure: --Promote a Librarian to Manager
+Code:
+CREATE OR REPLACE PROCEDURE promote_to_manager(
+    staff_ssn VARCHAR,
+    branch_id VARCHAR
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    -- Ensure the staff is a librarian
+    IF NOT EXISTS (
+        SELECT 1 
+        FROM Staff 
+        WHERE SSN = staff_ssn AND Post = 'Librarian' AND BranchID = branch_id
+    ) THEN
+        RAISE EXCEPTION 'Staff with SSN % is not a librarian in branch %', staff_ssn, branch_id;
+    END IF;
+
+    -- Update the staff's post to Manager
+    UPDATE Staff
+    SET Post = 'Manager', Super_SSN = NULL
+    WHERE SSN = staff_ssn;
+
+    RAISE NOTICE 'Staff with SSN % has been promoted to Manager for branch %', staff_ssn, branch_id;
+END;
+$$;
+
+-- Example usage:
+-- CALL promote_to_manager('345-67-8901', 'LIBTECH01');
+
+
+
 
 
 -- please follow the same format for the remaining views/ triggers, etc (check hamdan's part)
