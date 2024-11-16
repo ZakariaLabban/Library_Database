@@ -92,7 +92,7 @@ ORDER BY Frequency DESC;
 
 Tia: 
 
-Q1: Retrieve the total amount each customer has spent on book purchases and item purchases, along with their most frequently visited branch.
+Q1: Retrieve the total amount each customer has spent on book purchases and item purchases and the most frequently visited branch.
 Code:
 SELECT 
     c.Username,
@@ -117,8 +117,21 @@ GROUP BY
 
 
 
-Q2:
+Q2: List staff who have worked more than 20% above the average hours across all branches.
 Code:
+WITH Avg_Hours AS (
+    SELECT AVG(Hours) AS Avg_Hours FROM Staff
+)
+SELECT 
+    First_Name, 
+    Last_Name, 
+    Hours
+FROM 
+    Staff, Avg_Hours
+WHERE 
+    Hours > Avg_Hours.Avg_Hours * 1.2;
+
+
 
 
 
