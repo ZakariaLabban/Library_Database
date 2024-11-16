@@ -157,9 +157,35 @@ ORDER BY
     s.Supp_Name;
 
 
+Trigger: Automatically Update the Quantity of Books for Sale After a Purchase
+Code:
+CREATE OR REPLACE FUNCTION update_book_stock()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the number of copies in stock will become negative
+    IF (SELECT Number_of_Copies FROM Stores_Booksforsale 
+        WHERE BranchID = NEW.BranchID AND ISBN = NEW.ISBN) < NEW.Quantity THEN
+        RAISE EXCEPTION 'Not enough copies in stock for ISBN % in branch %', NEW.ISBN, NEW.BranchID;
+    END IF;
+    
+    -- Update the stock after a successful purchase
+    UPDATE Stores_Booksforsale
+    SET Number_of_Copies = Number_of_Copies - NEW.Quantity
+    WHERE BranchID = NEW.BranchID AND ISBN = NEW.ISBN;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_update_book_stock
+AFTER INSERT ON Buys_Books
+FOR EACH ROW
+EXECUTE FUNCTION update_book_stock();
 
 
--- please follow the same format for the remaining views/ triggers, etc (Check hamdan's part)
+
+
+
 
 Zak:
 
