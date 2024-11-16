@@ -122,10 +122,41 @@ example: CALL transfer_book_stock('LIBTECH01', 'LIBTECH02', '0000000003421', 5);
 
 Tia:
 
-View1: -- please write the first view query
+View1: This view lists all books available for sale, categorized by genre along with their prices.
 Code:
+CREATE VIEW Books_Available_For_Sale AS
+SELECT 
+    bs.ISBN, 
+    bs.Title, 
+    bs.Genre, 
+    bs.Price, 
+    bs.Edition, 
+    bs.Lang, 
+    p.Publisher_Name
+FROM 
+    Books_for_Sale bs
+JOIN 
+    Publisher p ON bs.Publisher_Name = p.Publisher_Name
+ORDER BY 
+    bs.Genre, bs.Price DESC;
 
---please write is code here
+View 2: This view provides a summary of items supplied by each supplier along with the total quantity supplied
+Code: 
+CREATE VIEW Supplier_Supply_Summary AS
+SELECT 
+    s.Supp_Name, 
+    i.Items_Name, 
+    SUM(i.Qty_Supplied) AS Total_Supplied
+FROM 
+    Items i
+JOIN 
+    Supplier s ON i.Supp_Name = s.Supp_Name
+GROUP BY 
+    s.Supp_Name, i.Items_Name
+ORDER BY 
+    s.Supp_Name;
+
+
 
 
 -- please follow the same format for the remaining views/ triggers, etc (Check hamdan's part)
