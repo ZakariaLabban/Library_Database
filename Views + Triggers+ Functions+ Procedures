@@ -34,7 +34,7 @@ FROM
 WHERE 
     s.Hours > 0
 ORDER BY 
-    s.BranchID, s.Total_Hours DESC;
+    s.BranchID, Total_Hours DESC;
 
 
 Trigger: Prevent Stock from Going Negative in Branch Inventory
