@@ -22,7 +22,7 @@ ORDER BY
 
 View2: Total Working Hours by Staff in Each Branch
 Code:
-REATE VIEW Staff_Working_Hours AS
+CREATE VIEW Staff_Working_Hours AS
 SELECT 
     s.BranchID, 
     s.SSN, 
