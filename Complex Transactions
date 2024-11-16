@@ -116,7 +116,6 @@ GROUP BY
     c.Username, c.First_Name, c.Last_Name;
 
 
-
 Q2: List staff who have worked more than 10% above the average hours across all branches.
 Code:
 SELECT 
@@ -153,6 +152,7 @@ SELECT
 FROM 
     Customer_Spend;
 -- COALESCE Ensures that if either SUM() returns NULL, it defaults to 0 instead, preventing null values from affecting the result.
+
 
 Q4: Find the top 5 suppliers who generated the most revenue from their items.
 Code:
