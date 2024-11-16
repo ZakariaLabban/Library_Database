@@ -129,6 +129,34 @@ WHERE
     Hours > (SELECT AVG(Hours) FROM Staff) * 1.1;
 
 
+Q3: Categorize customers into segments (High, Medium, Low spenders) based on their total spending
+Code:
+WITH Customer_Spend AS ( 
+    SELECT 
+        c.Username, 
+        COALESCE(SUM(b.Quantity * bs.Price), 0) + COALESCE(SUM(i.Quantity * it.Price), 0) AS Total_Spending
+    FROM 
+        Customer c
+    LEFT JOIN Buys_Books b ON c.Username = b.Username
+    LEFT JOIN Books_for_Sale bs ON b.ISBN = bs.ISBN
+    LEFT JOIN Purchases_Items i ON c.Username = i.Username
+    LEFT JOIN Items it ON i.Barcode = it.Barcode
+    GROUP BY c.Username
+)
+SELECT 
+    Username, 
+    CASE 
+        WHEN Total_Spending > 500 THEN 'High Spender'
+        WHEN Total_Spending > 200 THEN 'Medium Spender'
+        ELSE 'Low Spender'
+    END AS Customer_Segment
+FROM 
+    Customer_Spend;
+-- COALESCE Ensures that if either SUM() returns NULL, it defaults to 0 instead, preventing null values from affecting the result.
+
+
+
+
 
 
 
