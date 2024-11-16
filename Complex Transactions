@@ -183,8 +183,91 @@ LIMIT 2;
 Zak:
 
 
-Q1:         --please write the first query here
+Q1:   --List all customers who bought books or items more than once from a single library branch.     
 Code:
---- please write its code here
+SELECT c.Username, c.First_Name, c.Last_Name, COUNT(b.ISBN) + COUNT(p.Barcode) AS Total_Purchases, b.BranchID
+FROM Customer c
+LEFT JOIN Buys_Books b ON c.Username = b.Username
+LEFT JOIN Purchases_Items p ON c.Username = p.Username
+GROUP BY c.Username, c.First_Name, c.Last_Name, b.BranchID
+HAVING COUNT(b.ISBN) + COUNT(p.Barcode) > 1;
 
----follow this format for remaining queries (check hamdan's part)
+
+Q2:--Retrieve staff who manage libraries with the highest number of items
+Code:
+SELECT s.First_Name, s.Last_Name, s.BranchID, SUM(si.Qty_Stored) AS Total_Items
+FROM Staff s
+JOIN Stores_Items si ON s.BranchID = si.BranchID
+WHERE s.Post = 'Manager'
+GROUP BY s.First_Name, s.Last_Name, s.BranchID
+ORDER BY Total_Items DESC
+LIMIT 1;
+
+Q3: --Find books that moved from sale to rent and were rented out, including penalties incurred.
+Code:
+SELECT sr.BookID, bfr.Title, bfr.Genre, bfr.Price, sr.Discount, br.Penalty
+FROM Sale_to_Rent sr
+JOIN Books_for_Rent bfr ON sr.BookID = bfr.BookID
+JOIN Borrows br ON sr.BookID = br.BookID;
+
+Q4: --Get the average penalty by genre for books rented out.
+Code:
+SELECT bfr.Genre, AVG(br.Penalty) AS Avg_Penalty
+FROM Books_for_Rent bfr
+JOIN Borrows br ON bfr.BookID = br.BookID
+GROUP BY bfr.Genre
+ORDER BY Avg_Penalty DESC;
+
+Q5: --Find library branches that are running low on inventory.
+Code:
+SELECT si.BranchID, l.Address, SUM(si.Qty_Stored) AS Total_Items, SUM(sb.Number_of_Copies) AS Total_Books
+FROM Stores_Items si
+JOIN Libraryy l ON si.BranchID = l.BranchID
+JOIN Stores_booksforsale sb ON si.BranchID = sb.BranchID
+GROUP BY si.BranchID, l.Address
+HAVING SUM(si.Qty_Stored) + SUM(sb.Number_of_Copies) < 50;
+
+
+Q6: --Total Revenue from Book and Item Sales by Library Branch
+Code:
+SELECT 
+    l.BranchID,
+    COALESCE(SUM(bb.Quantity * bfs.Price), 0) AS Book_Sales_Revenue,
+    COALESCE(SUM(pi.Quantity * i.Price), 0) AS Item_Sales_Revenue,
+    COALESCE(SUM(bb.Quantity * bfs.Price), 0) + COALESCE(SUM(pi.Quantity * i.Price), 0) AS Total_Revenue
+FROM 
+    Libraryy l
+LEFT JOIN Buys_Books bb ON l.BranchID = bb.BranchID
+LEFT JOIN Books_for_Sale bfs ON bb.ISBN = bfs.ISBN
+LEFT JOIN Purchases_Items pi ON l.BranchID = pi.BranchID
+LEFT JOIN Items i ON pi.Barcode = i.Barcode
+GROUP BY l.BranchID
+ORDER BY Total_Revenue DESC;
+
+Q7: --List authors who have contributed to both books for sale and books for rent.
+Code:
+SELECT DISTINCT ab.Author_Name
+FROM Authors_booksale ab
+JOIN Authors_bookrent abr ON ab.Author_Name = abr.Author_Name;
+
+Q8: --Customers Who Borrowed and Then Bought the Same Book Title
+Code:
+SELECT DISTINCT 
+    bo.Username, 
+    bfr.Title, 
+    bb.Date_Time AS Purchase_Date, 
+    bo.Date_Out AS Borrow_Date
+FROM 
+    Borrows bo
+JOIN Books_for_Rent bfr ON bo.BookID = bfr.BookID
+JOIN Buys_Books bb ON bo.Username = bb.Username AND bfr.ISBN = bb.ISBN;
+
+
+Q9: --Retrieve librarians working the most hours across all branches.
+Code:
+SELECT s.First_Name, s.Last_Name, s.BranchID, s.Hours
+FROM Staff s
+WHERE s.Post = 'Librarian'
+ORDER BY s.Hours DESC
+LIMIT 5;
+
