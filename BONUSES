@@ -67,9 +67,52 @@ Importance:
 This query is helpful for analyzing book demand and circulation within the library.
 It helps the library identify popular books that may need more copies due to high demand.
 
-
 Usage:
 SELECT * FROM Borrowing_Chain;
 
 
+
+SECURITY MECHANISM 1: User Roles and Permissions
+-- Creating roles
+CREATE ROLE Librarian;
+CREATE ROLE Admin;
+CREATE ROLE Customer;
+
+-- Granting permissions to Librarian
+GRANT SELECT, INSERT, UPDATE ON Borrows TO Librarian;
+GRANT SELECT ON Customer TO Librarian;
+
+-- Granting full access to Admin
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO Admin;
+
+-- Granting read-only access to Customers
+GRANT SELECT ON Books_for_Sale, Books_for_Rent TO Customer;
+
+
+
+
+SECURITY MECHANISM 2: Restrict data access based on the user’s role or identity
+-- Enable row-level security on the Borrows table
+ALTER TABLE Borrows ENABLE ROW LEVEL SECURITY;
+
+-- Create a policy to allow only the borrower to see their records
+CREATE POLICY Borrower_Policy
+ON Borrows
+USING (Username = CURRENT_USER);
+
+-- Apply the policy
+ALTER TABLE Borrows FORCE ROW LEVEL SECURITY;
+
+
+!!!!!!!SO IMPORTANTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT CYBERSECURITY INTERNSHIP
+
+SECURITY MECHANISM 3: SQL INJECTION
+
+SQLL INJECTION IS WHEN TRYING TO INSERT:
+SELECT * FROM Customer WHERE Username = 'en01' OR '1'='1';
+
+QUERY:
+PREPARE find_customer (VARCHAR) AS
+SELECT * FROM Customer WHERE Username = $1;
+EXECUTE find_customer('en01');
 
