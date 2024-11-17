@@ -18,7 +18,35 @@ INSERT INTO Authentication_System (Email, Passcode) VALUES
     ('as67@gmail.com', 'AS67Secure@'),
     ('ns09@gmail.com', 'NS09#Pass'),
     ('rm12@gmail.com', 'Rm12Safe@'),
-    ('rt65@gmail.com', 'RT65Pass!');
+    ('rt65@gmail.com', 'RT65Pass!'),
+    ('hassan.abboud@gmail.com', 'Hassan@Abb123'),
+    ('fatima.moussa@gmail.com', 'FatimaMoussa@54'),
+    ('tarek.darwish@gmail.com', 'TarekD#764'),
+    ('amira.abdelrahman@gmail.com', 'AmiraRahman@89'),
+    ('sami.chahine@gmail.com', 'SamiC!5432'),
+    ('hana.elkhoury@gmail.com', 'Hana@Khoury21'),
+    ('khaled.hajjar@gmail.com', 'HajjarKhaled#77'),
+    ('layla.salem@gmail.com', 'LaylaS@13#'),
+    ('marwan.daher@gmail.com', 'MarwanDaher@98'),
+    ('sara.jalloul@gmail.com', 'SaraJ!53@2'),
+    ('nizar.issa@gmail.com', 'IssaNizar#68'),
+    ('dina.ghandour@gmail.com', 'Dina@Ghand87'),
+    ('ahmad.kassem@gmail.com', 'KassemAhmad!92'),
+    ('reem.abouzeid@gmail.com', 'ReemAZ@34!'),
+    ('mohammad.farhat@gmail.com', 'Mohammad@Fh43'),
+    ('leila.omari@gmail.com', 'LeilaOmari#66'),
+    ('hadi.ziadeh@gmail.com', 'HadiZ@7854'),
+    ('yasmeen.mirza@gmail.com', 'YasmeenMirza!09'),
+    ('omar.bazzi@gmail.com', 'Omar@Bazzi44'),
+    ('ghada.saad@gmail.com', 'GhadaSaad@23'),
+    ('zainab.abdallah@gmail.com', 'Zainab@Abdallah12'),
+    ('mahmoud.jaber@gmail.com', 'MahmoudJaber#88'),
+    ('karim.ouwayda@gmail.com', 'KarimOuwayda@77'),
+    ('salma.rajab@gmail.com', 'SalmaR@56!'),
+    ('fadi.sabbagh@gmail.com', 'FadiSabbagh@43'),
+    ('rana.daher@gmail.com', 'Rana@Daher99'),
+    ('youssef.nahhas@gmail.com', 'YoussefN!1234');
+
 
 INSERT INTO Customer (Username, Phone_Number, Address, Sex, First_Name, Last_Name, Ct_Email) VALUES
     ('en01', '71/812354', 'Tripoli, Mina', 'M', 'Elias', 'Nasr', 'elias.nasr@gmail.com'),
@@ -30,7 +58,17 @@ INSERT INTO Customer (Username, Phone_Number, Address, Sex, First_Name, Last_Nam
     ('rh17', '03/564992', 'Saida, Taameer', 'M', 'Ramzi', 'Haddad', 'ramzi.haddad@gmail.com'),
     ('rh18', '76/172321', 'Beirut, Raouche', 'F', 'Rima', 'Halabieh', 'rima.halabieh@gmail.com'),
     ('es02', '71/342764', 'Beirut, Verdun', 'M', 'Elie', 'Salameh', 'elie.salameh@gmail.com'),
-    ('nm01', '78/876520', 'Beirut, Hamra', 'F', 'Nadine', 'Mabsout', 'nadine.mabsout@gmail.com');
+    ('nm01', '78/876520', 'Beirut, Hamra', 'F', 'Nadine', 'Mabsout', 'nadine.mabsout@gmail.com'),
+    ('ha01', '71/432156', 'Beirut, Ashrafieh', 'M', 'Hassan', 'Abboud', 'hassan.abboud@gmail.com'),
+    ('fm12', '76/985432', 'Saida, Sidon', 'F', 'Fatima', 'Moussa', 'fatima.moussa@gmail.com'),
+    ('td21', '03/765421', 'Tripoli, Maarad', 'M', 'Tarek', 'Darwish', 'tarek.darwish@gmail.com'),
+    ('aa22', '81/543219', 'Zahle, Taanayel', 'F', 'Amira', 'Abdelrahman', 'amira.abdelrahman@gmail.com'),
+    ('sc34', '70/764132', 'Batroun, Koubba', 'M', 'Sami', 'Chahine', 'sami.chahine@gmail.com'),
+    ('he01', '78/231654', 'Jounieh, Sarba', 'F', 'Hana', 'Elkhoury', 'hana.elkhoury@gmail.com'),
+    ('kh18', '03/124563', 'Tyre, Borj Al-Shamali', 'M', 'Khaled', 'Hajjar', 'khaled.hajjar@gmail.com'),
+    ('ls99', '71/786543', 'Bchamoun, Khaldeh', 'F', 'Layla', 'Salem', 'layla.salem@gmail.com'),
+    ('md21', '03/943215', 'Byblos, Aamchit', 'M', 'Marwan', 'Daher', 'marwan.daher@gmail.com'),
+    ('sj01', '70/978654', 'Jezzine, Wadi Jezzine', 'F', 'Sara', 'Jalloul', 'sara.jalloul@gmail.com');
 
 INSERT INTO Libraryy (BranchID, Address, Phone_Number) VALUES
     ('LIBTECH01', 'Hamra', '01/412344'),
@@ -42,7 +80,13 @@ INSERT INTO Libraryy (BranchID, Address, Phone_Number) VALUES
     ('LIBTECH07', 'Zahle', '09/128220'),
     ('LIBTECH08', 'Saida', '07/987098'),
     ('LIBTECH09', 'Nabatieh', '07/565890'),
-    ('LIBTECH10', 'Tyre', '07/987911');
+    ('LIBTECH10', 'Tyre', '07/987911'),
+    ('LIBTECH11', 'Beirut Central District', '01/123456'),
+    ('LIBTECH12', 'Achrafieh', '01/654321'),
+    ('LIBTECH13', 'Baabda', '05/456789'),
+    ('LIBTECH14', 'Batroun', '06/987654'),
+    ('LIBTECH15', 'Broummana', '04/345678');
+
 
 
 INSERT INTO Staff (SSN, First_Name, Last_Name, DoB, Blood_Type, Address, Salary, Post, Super_SSN, St_Email, BranchID, Hours) VALUES
@@ -54,7 +98,18 @@ INSERT INTO Staff (SSN, First_Name, Last_Name, DoB, Blood_Type, Address, Salary,
     ('678-90-1234', 'Wael', 'Fattouh', '1992-12-10', 'B+', 'Tyr', 2850, 'Librarian', '567-89-0123', 'wf02@gmail.com', 'LIBTECH03', 50),
     ('789-01-2345', 'Adam', 'Serhan', '2000-11-25', 'O+', 'Saida', 2500, 'Librarian', '678-90-1234', 'as67@gmail.com', 'LIBTECH05', 55),
     ('890-12-3456', 'Noura', 'Succar', '1997-04-04', 'AB+', 'Beirut', 2000, 'Clerk', '789-01-2345', 'ns09@gmail.com', 'LIBTECH05', 50),
-    ('901-23-4567', 'Reem', 'Karam', '2000-09-09', 'AB-', 'BaaLIBTECHack', 1850, 'Librarian', '567-89-0123', 'rm12@gmail.com', 'LIBTECH05', 45);
+    ('901-23-4567', 'Reem', 'Karam', '2000-09-09', 'AB-', 'BaaLIBTECHack', 1850, 'Librarian', '567-89-0123', 'rm12@gmail.com', 'LIBTECH05', 45),
+    ('112-34-5678', 'Hassan', 'Abboud', '1985-06-12', 'O+', 'Beirut', 4200, 'Manager', NULL, 'hassan.abboud@gmail.com', 'LIBTECH11', 40),
+    ('223-45-6789', 'Fatima', 'Moussa', '1993-07-15', 'A+', 'Saida', 2800, 'Librarian', '112-34-5678', 'fatima.moussa@gmail.com', 'LIBTECH11', 50),
+    ('334-56-7890', 'Tarek', 'Darwish', '1988-03-10', 'B+', 'Tripoli', 4000, 'Manager', NULL, 'tarek.darwish@gmail.com', 'LIBTECH12', 45),
+    ('445-67-8901', 'Amira', 'Abdelrahman', '1991-11-20', 'AB-', 'Batroun', 2900, 'Librarian', '334-56-7890', 'amira.abdelrahman@gmail.com', 'LIBTECH12', 50),
+    ('556-78-9012', 'Sami', 'Chahine', '1982-02-02', 'O-', 'Jbeil', 4500, 'Manager', NULL, 'sami.chahine@gmail.com', 'LIBTECH13', 40),
+    ('667-89-0123', 'Hana', 'Elkhoury', '1995-08-18', 'B-', 'Byblos', 2500, 'Librarian', '556-78-9012', 'hana.elkhoury@gmail.com', 'LIBTECH13', 50),
+    ('778-90-1234', 'Khaled', 'Hajjar', '1987-04-25', 'A-', 'Baabda', 4700, 'Manager', NULL, 'khaled.hajjar@gmail.com', 'LIBTECH14', 40),
+    ('889-01-2345', 'Layla', 'Salem', '1994-12-12', 'O+', 'Broummana', 2700, 'Librarian', '778-90-1234', 'layla.salem@gmail.com', 'LIBTECH14', 45),
+    ('990-12-3456', 'Marwan', 'Daher', '1989-01-01', 'AB+', 'Achrafieh', 3900, 'Manager', NULL, 'marwan.daher@gmail.com', 'LIBTECH15', 45),
+    ('101-23-4567', 'Sara', 'Jalloul', '1996-06-06', 'B+', 'Zahle', 2800, 'Librarian', '990-12-3456', 'sara.jalloul@gmail.com', 'LIBTECH15', 50);
+
 
 INSERT INTO Dependents (SSN, Dep_Name, Relationship, Sex) VALUES
     ('123-45-6789', 'Sawsan', 'wife', 'F'),
@@ -66,7 +121,23 @@ INSERT INTO Dependents (SSN, Dep_Name, Relationship, Sex) VALUES
     ('890-12-3456', 'Adam', 'spouse', 'M'),
     ('890-12-3456', 'Roy', 'son', 'M'),
     ('901-23-4567', 'Joyce', 'mother', 'F'),
-    ('901-23-4567', 'Georges', 'father', 'M');
+    ('901-23-4567', 'Georges', 'father', 'M'),
+    ('112-34-5678', 'Laila', 'wife', 'F'),
+    ('112-34-5678', 'Ahmad', 'son', 'M'),
+    ('112-34-5678', 'Maya', 'daughter', 'F'),
+    ('223-45-6789', 'Salim', 'father', 'M'),
+    ('445-67-8901', 'Rami', 'brother', 'M'),
+    ('445-67-8901', 'Nour', 'sister', 'F'),
+    ('556-78-9012', 'Fatima', 'wife', 'F'),
+    ('778-90-1234', 'Lama', 'daughter', 'F'),
+    ('778-90-1234', 'Raya', 'daughter', 'F'),
+    ('889-01-2345', 'Youssef', 'son', 'M'),
+    ('990-12-3456', 'Sami', 'father', 'M'),
+    ('990-12-3456', 'Nadine', 'mother', 'F'),
+    ('101-23-4567', 'Jad', 'brother', 'M'),
+    ('101-23-4567', 'Rita', 'sister', 'F'),
+    ('101-23-4567', 'Hala', 'mother', 'F');
+
 
 INSERT INTO Supplier (Supp_Name, Address, Phone_Number) VALUES
     ('Najjar', 'Beirut', '01/255412'),
@@ -78,8 +149,17 @@ INSERT INTO Supplier (Supp_Name, Address, Phone_Number) VALUES
     ('JoueClub', 'Beirut', '01/212343'),
     ('Crafts&More', 'Jounieh', '04/312366'),
     ('Virgin', 'Jounieh', '04/565723'),
-    ('ReadPlus', 'Zahle', '09/623657');
-
+    ('ReadPlus', 'Zahle', '09/623657'),
+    ('OfficeOne', 'Beirut', '01/223344'),
+    ('ModernStationery', 'Tripoli', '06/554432'),
+    ('TechZone', 'Beirut', '01/889900'),
+    ('Art&CraftWorld', 'Byblos', '04/443322'),
+    ('GadgetStore', 'Beirut', '01/667788'),
+    ('StationeryHub', 'Saida', '07/123456'),
+    ('BookPalace', 'Tyre', '07/334455'),
+    ('SmartOffice', 'Beirut', '01/990088'),
+    ('ClassySupplies', 'Jbeil', '09/445566'),
+    ('Libra', 'Batroun', '06/778899');
 
 INSERT INTO Items (Barcode, Items_Name, Age_Group, Price, Genre, Supp_Name, Supp_Address, Qty_Supplied, Date_Supplied)
 VALUES
@@ -92,7 +172,28 @@ VALUES
 ('0000000000040134', 'GtaV', '18+', 25.00, 'Games', 'Najjar', 'Beirut', 150, '2023-02-20'),
 ('0000000000040250', 'Fifa24', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 400, '2023-11-11'),
 ('0000000000040255', 'Uncharted3', '16+', 25.00, 'Games', 'Najjar', 'Beirut', 100, '2024-05-31'),
-('0000000000040300', 'Fifa23', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 120, '2024-01-05');
+('0000000000040300', 'Fifa23', NULL, 25.00, 'Games', 'Najjar', 'Beirut', 120, '2024-01-05'),
+('0000000000050001', 'Smartwatch', NULL, 199.99, 'Electronics', 'GadgetStore', 'Beirut', 50, '2024-10-15'),
+('0000000000050002', 'Bluetooth Speaker', '10+', 49.99, 'Electronics', 'GadgetStore', 'Beirut', 75, '2024-11-01'),
+('0000000000060003', 'Mechanical Keyboard', '12+', 99.99, 'Electronics', 'TechZone', 'Beirut', 60, '2024-08-20'),
+('0000000000060004', 'Gaming Mouse', '12+', 39.99, 'Electronics', 'TechZone', 'Beirut', 100, '2024-08-20'),
+('0000000000070005', '3D Puzzle', '6+', 29.99, 'Toys', 'ClassySupplies', 'Jounieh', 40, '2024-09-05'),
+('0000000000070006', 'Paint Set', '8+', 15.00, 'Art Supplies', 'ClassySupplies', 'Jounieh', 50, '2024-09-10'),
+('0000000000080007', 'Notebook Pack', '12+', 10.00, 'Stationery', 'ReadPlus', 'Zahle', 200, '2024-07-01'),
+('0000000000090008', 'USB-C Adapter', NULL, 19.99, 'Electronics', 'TechZone', 'Beirut', 120, '2024-11-15'),
+('0000000000100009', 'Action Figure', '8+', 25.00, 'Toys', 'JoueClub', 'Beirut', 100, '2024-10-10'),
+('0000000000110010', 'Coloring Book', '4+', 5.99, 'Books', 'ReadPlus', 'Zahle', 250, '2024-05-15'),
+('0000000000120011', 'Wireless Charger', NULL, 29.99, 'Electronics', 'GadgetStore', 'Beirut', 80, '2024-12-01'),
+('0000000000130012', 'Kids Backpack', '6+', 35.00, 'School Supplies', 'ClassySupplies', 'Jounieh', 60, '2024-03-01'),
+('0000000000140013', 'Watercolor Paint Set', '10+', 20.00, 'Art Supplies', 'Crafts&More', 'Jounieh', 90, '2024-04-10'),
+('0000000000150014', 'Graphic Novel', '15+', 12.00, 'Books', 'ReadPlus', 'Zahle', 180, '2024-06-20'),
+('0000000000160015', 'Puzzle Game', '5+', 15.99, 'Toys', 'Virgin', 'Jounieh', 50, '2024-05-25'),
+('0000000000170016', 'Highlighters', NULL, 8.99, 'Stationery', 'OfficeOne', 'Beirut', 300, '2024-10-01'),
+('0000000000180017', 'LED Desk Lamp', NULL, 59.99, 'Electronics', 'TechZone', 'Beirut', 70, '2024-11-12'),
+('0000000000190018', 'Erasable Markers', '6+', 12.99, 'Art Supplies', 'Crafts&More', 'Jounieh', 110, '2024-03-30'),
+('0000000000200019', 'DIY Craft Kit', '8+', 18.99, 'Toys', 'JoueClub', 'Beirut', 90, '2024-10-05'),
+('0000000000210020', 'Fiction Novel', '16+', 14.99, 'Books', 'ReadPlus', 'Zahle', 150, '2024-06-15');
+
 
 INSERT INTO Publisher (Publisher_Name, Address, Phone_Number)
 VALUES
@@ -105,7 +206,18 @@ VALUES
 ('Dar Al-Maarifa', 'Nabatieh', '07/634562'),
 ('Dar Al-Fikr', 'Tripoli', '09/643225'),
 ('WassupLebanon', 'Jbeil', '71/232321'),
-('Dar Al-Salam', 'Beirut', '81/123333');
+('Dar Al-Salam', 'Beirut', '81/123333'),
+('Dar Al-Turath', 'Beirut, Verdun', '01/987654'),
+('Dar Al-Hekma', 'Mount Lebanon, Broummana', '04/667788'),
+('Kalimat Lebanon', 'Byblos', '09/776655'),
+('Dar Al-Adab', 'Saida, Sidon', '07/554433'),
+('Dar Al-Hayat', 'Tripoli, Mina', '06/778899'),
+('Dar Al-Watan', 'Zahle, Bekaa', '08/667788'),
+('Al-Qalam', 'Beirut, Ashrafieh', '01/445566'),
+('Dar Al-Manar', 'Tyre, Rachidiyeh', '07/334455'),
+('Al-Maktaba', 'Batroun', '06/223344'),
+('Dar Al-Risala', 'Saida, Abra', '07/112233');
+
 
 INSERT INTO Books_for_Sale (ISBN, Title, Genre, Price, Translator, Edition, Pages, Lang, Publisher_Name)
 VALUES
@@ -118,7 +230,36 @@ VALUES
 ('0000000006113', 'Voila', 'Literature', 31.25, 'Karim Akram', 5, 150, 'French', 'Dar Al-Salam'),
 ('0000000006772', 'Quand?', 'Literature', 76.25, 'Yolga Safa', 2, 89, 'French', 'Dar Al-Maarifa'),
 ('0000000007880', 'Seniorita', 'Literature', 55.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr'),
-('0000000007994', 'Wander', 'Geography', 46.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad');
+('0000000007994', 'Wander', 'Geography', 46.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad'),
+('0000000010001', 'Physics Basics', 'Science', 45.00, NULL, 3, 300, 'English', 'Dar Al-Kitaba'),
+('0000000011002', 'Calculus 101', 'Maths', 60.00, NULL, 1, 400, 'English', 'Dar Al-Nasher'),
+('0000000012003', 'Modern Poetry', 'Literature', 20.00, 'Lina Masri', 2, 120, 'Arabic', 'Dar Al-Turath'),
+('0000000013004', 'Business Growth', 'Business', 75.00, NULL, 1, 250, 'English', 'Dar Al-Hekma'),
+('0000000014005', 'Graphic Design', 'Arts', 85.00, NULL, 4, 320, 'English', 'Kalimat Lebanon'),
+('0000000015006', 'Interior Decor', 'Arts', 70.00, NULL, 3, 180, 'English', 'Dar Al-Adab'),
+('0000000016007', 'Molecular Biology', 'Science', 120.00, NULL, 2, 500, 'English', 'Dar Al-Hayat'),
+('0000000017008', 'Civilizations', 'History', 95.00, NULL, 5, 400, 'English', 'Dar Al-Watan'),
+('0000000018009', 'Perspectives', 'Philosophy', 50.00, NULL, 1, 200, 'English', 'Al-Qalam'),
+('0000000019001', 'Marketing 101', 'Business', 65.00, NULL, 1, 300, 'English', 'Dar Al-Manar'),
+('0000000020002', 'Astronomy', 'Science', 110.00, NULL, 4, 350, 'English', 'Dar Al-Risala'),
+('0000000021003', 'Mediterranean Cooking', 'Cooking', 55.00, 'Jana Khalil', 1, 180, 'English', 'Dar Al-Maarifa'),
+('0000000022004', 'Italian Recipes', 'Cooking', 65.00, 'Marco Rossi', 2, 220, 'Italian', 'Today News'),
+('0000000023005', 'Arabic Calligraphy', 'Arts', 40.00, 'Nour Hassan', 1, 150, 'Arabic', 'Dar Al-Balad'),
+('0000000024006', 'Digital Marketing', 'Business', 80.00, NULL, 2, 270, 'English', 'Dar Al-Hekma'),
+('0000000025007', 'Big Data Analysis', 'Technology', 95.00, NULL, 3, 320, 'English', 'Kalimat Lebanon'),
+('0000000026008', 'Artificial Intelligence', 'Technology', 120.00, NULL, 4, 450, 'English', 'Dar Al-Fikr'),
+('0000000027009', 'Cybersecurity', 'Technology', 85.00, NULL, 2, 280, 'English', 'Lebanon Readings'),
+('0000000028001', 'Yoga for Beginners', 'Health', 30.00, NULL, 1, 150, 'English', 'Dar Al-Salam'),
+('0000000029002', 'Mindfulness', 'Health', 40.00, NULL, 1, 200, 'English', 'WassupLebanon'),
+('0000000030003', 'Machine Learning Basics', 'Technology', 125.00, NULL, 3, 350, 'English', 'Dar Al-Kitaba'),
+('0000000031004', 'The Art of Negotiation', 'Business', 75.00, NULL, 2, 240, 'English', 'Dar Al-Hekma'),
+('0000000032005', 'Quantum Physics Explained', 'Science', 130.00, NULL, 5, 400, 'English', 'Dar Al-Manar'),
+('0000000033006', 'Design Thinking', 'Business', 85.00, NULL, 2, 280, 'English', 'Kalimat Lebanon'),
+('0000000034007', 'Ancient Cultures', 'History', 90.00, NULL, 3, 320, 'English', 'Dar Al-Risala'),
+('0000000035008', 'Data Science Advanced', 'Technology', 115.00, NULL, 4, 420, 'English', 'Lebanon Readings'),
+('0000000036009', 'Cooking for Kids', 'Cooking', 45.00, 'Nadia Abed', 1, 120, 'English', 'Dar Al-Maarifa'),
+('0000000037001', 'World Mythologies', 'History', 99.00, NULL, 4, 350, 'English', 'Today News');
+
 
 INSERT INTO Books_for_Rent (BookID, ISBN, Title, Genre, Price, Translator, Edition, Pages, Lang, Publisher_Name, Shelf_No, Row_No, BranchID)
 VALUES
@@ -127,11 +268,40 @@ VALUES
 ('0000000004562#012', '0000000004562', 'LearnArbic', 'Literature', 15.00, 'Asmaa Karam', 2, 102, 'Arabic', 'Dar Al-Salam', 12, 5, 'LIBTECH02'),
 ('0000000004989#023', '0000000004989', 'MenDuties', 'Psychology', 12.00, NULL, 1, 234, 'English', 'Dar Al-Balad', 16, 4, 'LIBTECH05'),
 ('0000000005232#003', '0000000005232', 'GirlsPower', 'Psychology', 70.00, NULL, 1, 675, 'English', 'WassupLebanon', 17, 6, 'LIBTECH05'),
-('0000000005900#002', '0000000005900', 'LifeonEarth', 'Geography', 80.00, NULL, 4, 200,'English','Today News', 02, 2, 'LIBTECH06'),
+('0000000005900#002', '0000000005900', 'LifeonEarth', 'Geography', 80.00, NULL, 4, 200, 'English', 'Today News', 02, 2, 'LIBTECH06'),
 ('0000000006113#020', '0000000006113', 'Voila', 'Literature', 15.00, 'Karim Akram', 5, 150, 'French', 'Dar Al-Salam', 13, 4, 'LIBTECH07'),
 ('0000000006772#012', '0000000006772', 'Quand?', 'Literature', 20.00, 'Yolga Safa', 2, 89, 'French', 'Dar Al-Maarifa', 19, 1, 'LIBTECH02'),
 ('0000000007880#001', '0000000007880', 'Seniorita', 'Literature', 25.00, 'Monica Smith', 1, 56, 'Spanish', 'Dar Al-Fikr', 19, 3, 'LIBTECH02'),
-('0000000007994#010', '0000000007994', 'Wander', 'Geography', 16.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad', 02, 5, 'LIBTECH05');
+('0000000007994#010', '0000000007994', 'Wander', 'Geography', 16.00, 'Sandra Kenaan', 1, 89, 'English', 'Dar Al-Balad', 02, 5, 'LIBTECH05'),
+('0000000010001#011', '0000000010001', 'Physics Basics', 'Science', 10.00, NULL, 3, 300, 'English', 'Dar Al-Kitaba', 11, 1, 'LIBTECH01'),
+('0000000011002#012', '0000000011002', 'Calculus 101', 'Maths', 10.00, NULL, 1, 400, 'English', 'Dar Al-Nasher', 12, 2, 'LIBTECH02'),
+('0000000012003#013', '0000000012003', 'Modern Poetry', 'Literature', 8.00, 'Lina Masri', 2, 120, 'Arabic', 'Dar Al-Turath', 13, 3, 'LIBTECH03'),
+('0000000013004#014', '0000000013004', 'Business Growth', 'Business', 15.00, NULL, 1, 250, 'English', 'Dar Al-Hekma', 14, 4, 'LIBTECH04'),
+('0000000014005#015', '0000000014005', 'Graphic Design', 'Arts', 20.00, NULL, 4, 320, 'English', 'Kalimat Lebanon', 15, 5, 'LIBTECH05'),
+('0000000015006#016', '0000000015006', 'Interior Decor', 'Arts', 25.00, NULL, 3, 180, 'English', 'Dar Al-Adab', 16, 6, 'LIBTECH06'),
+('0000000016007#017', '0000000016007', 'Molecular Biology', 'Science', 30.00, NULL, 2, 500, 'English', 'Dar Al-Hayat', 17, 2, 'LIBTECH07'),
+('0000000017008#018', '0000000017008', 'Civilizations', 'History', 20.00, NULL, 5, 400, 'English', 'Dar Al-Watan', 18, 3, 'LIBTECH08'),
+('0000000018009#019', '0000000018009', 'Perspectives', 'Philosophy', 12.00, NULL, 1, 200, 'English', 'Al-Qalam', 19, 4, 'LIBTECH09'),
+('0000000019001#020', '0000000019001', 'Marketing 101', 'Business', 15.00, NULL, 1, 300, 'English', 'Dar Al-Manar', 20, 5, 'LIBTECH10'),
+('0000000020002#021', '0000000020002', 'Astronomy', 'Science', 35.00, NULL, 4, 350, 'English', 'Dar Al-Risala', 21, 1, 'LIBTECH11'),
+('0000000021003#022', '0000000021003', 'Mediterranean Cooking', 'Cooking', 10.00, 'Jana Khalil', 1, 180, 'English', 'Dar Al-Maarifa', 22, 2, 'LIBTECH12'),
+('0000000022004#023', '0000000022004', 'Italian Recipes', 'Cooking', 20.00, 'Marco Rossi', 2, 220, 'Italian', 'Today News', 23, 3, 'LIBTECH13'),
+('0000000023005#024', '0000000023005', 'Arabic Calligraphy', 'Arts', 15.00, 'Nour Hassan', 1, 150, 'Arabic', 'Dar Al-Balad', 24, 4, 'LIBTECH14'),
+('0000000024006#025', '0000000024006', 'Digital Marketing', 'Business', 25.00, NULL, 2, 270, 'English', 'Dar Al-Hekma', 25, 5, 'LIBTECH15'),
+('0000000025007#026', '0000000025007', 'Big Data Analysis', 'Technology', 30.00, NULL, 3, 320, 'English', 'Kalimat Lebanon', 26, 6, 'LIBTECH01'),
+('0000000026008#027', '0000000026008', 'Artificial Intelligence', 'Technology', 35.00, NULL, 4, 450, 'English', 'Dar Al-Fikr', 27, 1, 'LIBTECH02'),
+('0000000027009#028', '0000000027009', 'Cybersecurity', 'Technology', 30.00, NULL, 2, 280, 'English', 'Lebanon Readings', 28, 2, 'LIBTECH03'),
+('0000000028001#029', '0000000028001', 'Yoga for Beginners', 'Health', 10.00, NULL, 1, 150, 'English', 'Dar Al-Salam', 29, 3, 'LIBTECH04'),
+('0000000029002#030', '0000000029002', 'Mindfulness', 'Health', 15.00, NULL, 1, 200, 'English', 'WassupLebanon', 30, 4, 'LIBTECH05'),
+('0000000030003#031', '0000000030003', 'Machine Learning Basics', 'Technology', 35.00, NULL, 3, 350, 'English', 'Dar Al-Kitaba', 31, 5, 'LIBTECH06'),
+('0000000031004#032', '0000000031004', 'The Art of Negotiation', 'Business', 20.00, NULL, 2, 240, 'English', 'Dar Al-Hekma', 32, 6, 'LIBTECH07'),
+('0000000032005#033', '0000000032005', 'Quantum Physics Explained', 'Science', 40.00, NULL, 5, 400, 'English', 'Dar Al-Manar', 33, 1, 'LIBTECH08'),
+('0000000033006#034', '0000000033006', 'Design Thinking', 'Business', 30.00, NULL, 2, 280, 'English', 'Kalimat Lebanon', 34, 2, 'LIBTECH09'),
+('0000000034007#035', '0000000034007', 'Ancient Cultures', 'History', 35.00, NULL, 3, 320, 'English', 'Dar Al-Risala', 35, 3, 'LIBTECH10'),
+('0000000035008#036', '0000000035008', 'Data Science Advanced', 'Technology', 40.00, NULL, 4, 420, 'English', 'Lebanon Readings', 36, 4, 'LIBTECH11'),
+('0000000036009#037', '0000000036009', 'Cooking for Kids', 'Cooking', 20.00, 'Nadia Abed', 1, 120, 'English', 'Dar Al-Maarifa', 37, 5, 'LIBTECH12'),
+('0000000037001#038', '0000000037001', 'World Mythologies', 'History', 40.00, NULL, 4, 350, 'English', 'Today News', 38, 6, 'LIBTECH13');
+
 
 INSERT INTO Authors_booksale (ISBN, Author_Name)
 VALUES
@@ -144,7 +314,29 @@ VALUES
 ('0000000006772', 'Zeinab Kalach'),
 ('0000000006772', 'Pamela Hokayem'),
 ('0000000007880', 'Camilla Ponduras'),
-('0000000007994', 'Donald Harris');
+('0000000007994', 'Donald Harris'),
+('0000000010001', 'Liam Brown'),
+('0000000010001', 'Emma Johnson'),
+('0000000011002', 'Michael Carter'),
+('0000000012003', 'Nadine El-Mir'),
+('0000000012003', 'Tarek Ghanem'),
+('0000000013004', 'Oliver Thompson'),
+('0000000013004', 'Sophia Wilson'),
+('0000000014005', 'Noah Robinson'),
+('0000000014005', 'Lucas Martinez'),
+('0000000015006', 'Mia Lopez'),
+('0000000015006', 'Ava Garcia'),
+('0000000016007', 'Ella Gonzalez'),
+('0000000016007', 'Alexander Rivera'),
+('0000000017008', 'Isabella Perez'),
+('0000000018009', 'James Anderson'),
+('0000000019001', 'Grace Moore'),
+('0000000020002', 'Benjamin Clark'),
+('0000000021003', 'Charlotte Young'),
+('0000000022004', 'Abdullah Hassan'),
+('0000000023005', 'Sara Ahmed'),
+('0000000024006', 'Fatima Hussein');
+
 
 INSERT INTO Authors_bookrent (BookID, Author_Name)
 VALUES
@@ -157,7 +349,29 @@ VALUES
 ('0000000006113#020', 'Zeinab Kalach'),
 ('0000000006772#012', 'Pamela Hokayem'),
 ('0000000007880#001', 'Camilla Ponduras'),
-('0000000007994#010', 'Donald Harris');
+('0000000007994#010', 'Donald Harris'),
+('0000000010001#011', 'Liam Brown'),
+('0000000010001#011', 'Emma Johnson'),
+('0000000011002#012', 'Michael Carter'),
+('0000000012003#013', 'Nadine El-Mir'),
+('0000000012003#013', 'Tarek Ghanem'),
+('0000000013004#014', 'Oliver Thompson'),
+('0000000013004#014', 'Sophia Wilson'),
+('0000000014005#015', 'Noah Robinson'),
+('0000000014005#015', 'Lucas Martinez'),
+('0000000015006#016', 'Mia Lopez'),
+('0000000015006#016', 'Ava Garcia'),
+('0000000016007#017', 'Ella Gonzalez'),
+('0000000016007#017', 'Alexander Rivera'),
+('0000000017008#018', 'Isabella Perez'),
+('0000000018009#019', 'James Anderson'),
+('0000000019001#020', 'Grace Moore'),
+('0000000020002#021', 'Benjamin Clark'),
+('0000000021003#022', 'Charlotte Young'),
+('0000000022004#023', 'Abdullah Hassan'),
+('0000000023005#024', 'Sara Ahmed'),
+('0000000024006#025', 'Fatima Hussein');
+
 
 
 INSERT INTO Stores_Items (BranchID, Barcode, Qty_Stored)
@@ -171,7 +385,28 @@ VALUES
     ('LIBTECH05', '0000000000040134', 34),
     ('LIBTECH09', '0000000000040250', 5),
     ('LIBTECH03', '0000000000040255', 14),
-    ('LIBTECH03', '0000000000040300', 38);
+    ('LIBTECH03', '0000000000040300', 38),
+    ('LIBTECH06', '0000000000050001', 20),
+    ('LIBTECH07', '0000000000050002', 25),
+    ('LIBTECH08', '0000000000060003', 15),
+    ('LIBTECH09', '0000000000060004', 35),
+    ('LIBTECH10', '0000000000070005', 30),
+    ('LIBTECH11', '0000000000070006', 40),
+    ('LIBTECH12', '0000000000080007', 50),
+    ('LIBTECH13', '0000000000090008', 30),
+    ('LIBTECH14', '0000000000100009', 25),
+    ('LIBTECH15', '0000000000110010', 35),
+    ('LIBTECH01', '0000000000120011', 30),
+    ('LIBTECH02', '0000000000130012', 25),
+    ('LIBTECH03', '0000000000140013', 40),
+    ('LIBTECH04', '0000000000150014', 20),
+    ('LIBTECH05', '0000000000160015', 15),
+    ('LIBTECH06', '0000000000170016', 35),
+    ('LIBTECH07', '0000000000180017', 50),
+    ('LIBTECH08', '0000000000190018', 30),
+    ('LIBTECH09', '0000000000200019', 20),
+    ('LIBTECH10', '0000000000210020', 40);
+
 
 
 INSERT INTO Stores_booksforsale (BranchID, ISBN, Number_of_Copies)
@@ -185,7 +420,36 @@ VALUES
     ('LIBTECH06', '0000000006772', 10),
     ('LIBTECH07', '0000000006772', 9),
     ('LIBTECH08', '0000000007880', 3),
-    ('LIBTECH09', '0000000007994', 18);
+    ('LIBTECH09', '0000000007994', 18),
+    ('LIBTECH10', '0000000010001', 15),
+    ('LIBTECH11', '0000000011002', 20),
+    ('LIBTECH12', '0000000012003', 25),
+    ('LIBTECH13', '0000000013004', 18),
+    ('LIBTECH14', '0000000014005', 10),
+    ('LIBTECH15', '0000000015006', 12),
+    ('LIBTECH01', '0000000016007', 20),
+    ('LIBTECH02', '0000000017008', 15),
+    ('LIBTECH03', '0000000018009', 25),
+    ('LIBTECH04', '0000000019001', 30),
+    ('LIBTECH05', '0000000020002', 22),
+    ('LIBTECH06', '0000000021003', 10),
+    ('LIBTECH07', '0000000022004', 14),
+    ('LIBTECH08', '0000000023005', 18),
+    ('LIBTECH09', '0000000024006', 17),
+    ('LIBTECH10', '0000000025007', 11),
+    ('LIBTECH11', '0000000026008', 13),
+    ('LIBTECH12', '0000000027009', 19),
+    ('LIBTECH13', '0000000028001', 20),
+    ('LIBTECH14', '0000000029002', 16),
+    ('LIBTECH15', '0000000030003', 8),
+    ('LIBTECH01', '0000000031004', 15),
+    ('LIBTECH02', '0000000032005', 10),
+    ('LIBTECH03', '0000000033006', 18),
+    ('LIBTECH04', '0000000034007', 13),
+    ('LIBTECH05', '0000000035008', 21),
+    ('LIBTECH06', '0000000036009', 12),
+    ('LIBTECH07', '0000000037001', 14);
+
 
 INSERT INTO Buys_Books (Username, BranchID, ISBN, Quantity, Date_Time)
 VALUES
