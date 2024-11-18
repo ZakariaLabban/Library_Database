@@ -75,15 +75,15 @@ SELECT * FROM Borrowing_Chain;
 SECURITY MECHANISM 1: User Roles and Permissions
 -- Creating roles
 CREATE ROLE Librarian;
-CREATE ROLE Admin;
+CREATE ROLE Manager;
 CREATE ROLE Customer;
 
 -- Granting permissions to Librarian
 GRANT SELECT, INSERT, UPDATE ON Borrows TO Librarian;
-GRANT SELECT ON Customer TO Librarian;
+GRANT SELECT ON Customer, Stores_Items, Stores_Booksforsale TO Librarian;
 
 -- Granting full access to Admin
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO Admin;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO Manager;
 
 -- Granting read-only access to Customers
 GRANT SELECT ON Books_for_Sale, Books_for_Rent TO Customer;
