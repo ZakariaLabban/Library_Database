@@ -117,36 +117,28 @@ SELECT * FROM Customer WHERE Username = $1;
 EXECUTE find_customer('en01');
 
 
+Security Mechanism 4: Encryption and Decryption
+
+CREATE EXTENSION pgcrypto;
+ALTER TABLE Authentication_System DROP CONSTRAINT chk_passcode;
+ALTER TABLE Authentication_System
+ALTER COLUMN Passcode TYPE BYTEA USING encode(Passcode, 'base64')::BYTEA;
+
+Encryption:
+Insert into Authentication_System Values('myh17@gmail.com',pgp_sym_encrypt('Qwerty123#@', 'encryption_key'));
+
+Decryption:
+SELECT Email,
+       pgp_sym_decrypt(Passcode, 'encryption_key') AS Decrypted_Passcode
+FROM Authentication_System
+WHERE Email = 'myh17@gmail.com';
 
 
 
 
 
-HAMDAN:
-recursive:
-CREATE OR REPLACE FUNCTION find_borrowers_by_book(title_input TEXT)
-RETURNS TABLE (Borrower TEXT) AS $$
-BEGIN
-    RETURN QUERY
-    WITH RECURSIVE Borrow_Customers AS (
-        SELECT DISTINCT b.Username AS Borrower, b.BookID
-        FROM Borrows b
-        JOIN Books_for_Rent br ON b.BookID = br.BookID
-        WHERE br.Title = title_input
 
-        UNION
 
-        SELECT DISTINCT bc.Borrower, b.BookID
-        FROM Borrow_Customers bc
-        JOIN Borrows b ON bc.BookID = b.BookID
-        WHERE b.Username != bc.Borrower
-    )
-    SELECT DISTINCT Borrower
-    FROM Borrow_Customers
-    ORDER BY Borrower;
-END;
-$$ LANGUAGE plpgsql;
 
--- Call the function with a book title
-SELECT * FROM find_borrowers_by_book('Book A');
+
 
