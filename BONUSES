@@ -116,3 +116,37 @@ PREPARE find_customer (VARCHAR) AS
 SELECT * FROM Customer WHERE Username = $1;
 EXECUTE find_customer('en01');
 
+
+
+
+
+
+
+HAMDAN:
+recursive:
+CREATE OR REPLACE FUNCTION find_borrowers_by_book(title_input TEXT)
+RETURNS TABLE (Borrower TEXT) AS $$
+BEGIN
+    RETURN QUERY
+    WITH RECURSIVE Borrow_Customers AS (
+        SELECT DISTINCT b.Username AS Borrower, b.BookID
+        FROM Borrows b
+        JOIN Books_for_Rent br ON b.BookID = br.BookID
+        WHERE br.Title = title_input
+
+        UNION
+
+        SELECT DISTINCT bc.Borrower, b.BookID
+        FROM Borrow_Customers bc
+        JOIN Borrows b ON bc.BookID = b.BookID
+        WHERE b.Username != bc.Borrower
+    )
+    SELECT DISTINCT Borrower
+    FROM Borrow_Customers
+    ORDER BY Borrower;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Call the function with a book title
+SELECT * FROM find_borrowers_by_book('Book A');
+
