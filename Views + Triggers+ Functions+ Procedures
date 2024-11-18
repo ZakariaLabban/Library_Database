@@ -66,25 +66,29 @@ EXECUTE FUNCTION update_book_stock();
 
 Trigger2: --Prevent a user from borrowing a new book if they have outstanding penalties in the Borrows table.
 Code:
-CREATE OR REPLACE FUNCTION prevent_borrow_with_penalty()
+CREATE OR REPLACE FUNCTION prevent_borrow_with_overdue()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Check for outstanding penalties
+    -- Check for overdue books
     IF EXISTS (
         SELECT 1
         FROM Borrows
-        WHERE Username = NEW.Username AND Penalty > 0
+        WHERE Username = NEW.Username 
+        AND Due_Date < CURRENT_DATE  -- Check if due date has passed
     ) THEN
-        RAISE EXCEPTION 'User % has outstanding penalties and cannot borrow a new book', NEW.Username;
+        RAISE EXCEPTION 'User % has overdue books and cannot borrow a new book', NEW.Username;
     END IF;
 
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-CREATE TRIGGER trigger_prevent_borrow_with_penalty
+
+-- Create the trigger to call the function before a new row is inserted
+CREATE TRIGGER trigger_prevent_borrow_with_overdue
 BEFORE INSERT ON Borrows
 FOR EACH ROW
-EXECUTE FUNCTION prevent_borrow_with_penalty();
+EXECUTE FUNCTION prevent_borrow_with_overdue();
+
 
 FUNCTIONS:
 
