@@ -12,12 +12,12 @@ LIMIT 5;
 
 Q2: List Customers Who Have Unreturned Books Past Due Date
 Code:
-SELECT c.Username, c.First_Name, c.Last_Name, b.BookID, br.Title, b.Due_Date, 
-       (CURRENT_DATE - b.Due_Date) * 0.5 AS Fine_Amount
+SELECT c.Username, c.First_Name, c.Last_Name, b.BookID, br.Title, b.Due_Date, b.Penalty
+       (b.Penalty + (CURRENT_DATE - b.Due_Date) * 0.5) AS Fine_Amount
 FROM Borrows b
 JOIN Customer c ON b.Username = c.Username
 JOIN Books_for_Rent br ON b.BookID = br.BookID
-WHERE b.Due_Date < CURRENT_DATE AND b.Penalty = 0;
+WHERE b.Due_Date < CURRENT_DATE;
 
 Q3: Determine Stock Levels of Items in All Branches
 Code:
