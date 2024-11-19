@@ -19,13 +19,7 @@ JOIN Customer c ON b.Username = c.Username
 JOIN Books_for_Rent br ON b.BookID = br.BookID
 WHERE b.Due_Date < CURRENT_DATE;
 
-Q3: Determine Stock Levels of Items in All Branches
-Code:
-SELECT si.BranchID, i.Items_Name, SUM(si.Qty_Stored) AS Total_Stock
-FROM Stores_Items si
-JOIN Items i ON si.Barcode = i.Barcode
-GROUP BY si.BranchID, i.Items_Name
-ORDER BY Total_Stock ASC;
+
 
 Q4: Branch with the Highest Number of Rentals
 Code: 
