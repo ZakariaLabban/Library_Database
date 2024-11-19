@@ -89,6 +89,96 @@ BEFORE INSERT ON Borrows
 FOR EACH ROW
 EXECUTE FUNCTION prevent_borrow_with_overdue();
 
+MIX PRO MAX BY ZAKARIA BILAL LABBAN:
+
+CREATE OR REPLACE FUNCTION handle_sale_to_rent()
+RETURNS TRIGGER AS $$
+DECLARE
+    shelf_no INT;
+    row_no INT;
+    branch_id VARCHAR(10);
+    existing_price NUMERIC;  -- To store the price of the existing book, if found
+BEGIN
+    -- Step 1: Extract Shelf_No and Row_No from BookID
+    shelf_no := CAST(SUBSTRING(NEW.BookID FROM POSITION('#' IN NEW.BookID) + 1 FOR 2) AS INT);
+    row_no := CAST(SUBSTRING(NEW.BookID FROM POSITION('#' IN NEW.BookID) + 3 FOR 1) AS INT);
+
+    -- Step 2: Get the BranchID from Stores_Booksforsale table
+    SELECT BranchID INTO branch_id
+    FROM Stores_Booksforsale
+    WHERE ISBN = NEW.ISBN
+    LIMIT 1;
+
+    -- Check if a valid branch was found
+    IF branch_id IS NULL THEN
+        RAISE EXCEPTION 'Cannot move book % to rent. It is not stored in any branch.', NEW.ISBN;
+    END IF;
+
+    -- Step 3: Check if the book exists in the Books_for_Sale table and has at least one copy
+    IF NOT EXISTS (
+        SELECT 1
+        FROM Stores_Booksforsale
+        WHERE ISBN = NEW.ISBN AND BranchID = branch_id AND Number_of_Copies > 0
+    ) THEN
+        RAISE EXCEPTION 'Cannot move book % to rent, not enough copies available in branch %.', NEW.ISBN, branch_id;
+    END IF;
+
+    -- Step 4: Decrease the number of copies for sale by 1
+    UPDATE Stores_Booksforsale
+    SET Number_of_Copies = Number_of_Copies - 1
+    WHERE ISBN = NEW.ISBN AND BranchID = branch_id;
+
+    -- Step 5: Check if there is an existing book with the same ISBN but a different BookID in Books_for_Rent
+    SELECT Price INTO existing_price
+    FROM Books_for_Rent
+    WHERE ISBN = NEW.ISBN
+    LIMIT 1;
+
+    -- Step 6: Determine the price of the moved book
+    IF existing_price IS NOT NULL THEN
+        -- Use the price of the existing book
+        RAISE NOTICE 'An existing book with ISBN % is found. Using the same price: %.', NEW.ISBN, existing_price;
+    ELSE
+        -- Calculate the discounted price
+        existing_price := ROUND((SELECT Price FROM Books_for_Sale WHERE ISBN = NEW.ISBN) * (1 - NEW.Discount / 100.0), 2);
+        RAISE NOTICE 'No existing book with ISBN % is found. Using the discounted price: %.', NEW.ISBN, existing_price;
+    END IF;
+
+    -- Step 7: Insert the book into the Books_for_Rent table
+    INSERT INTO Books_for_Rent (
+        BookID, ISBN, Title, Genre, Price, Translator, Edition, Pages, Lang, Publisher_Name, Shelf_No, Row_No, BranchID
+    )
+    SELECT
+        NEW.BookID, 
+        b.ISBN, 
+        b.Title, 
+        b.Genre, 
+        existing_price,  -- Set the price
+        b.Translator, 
+        b.Edition, 
+        b.Pages, 
+        b.Lang, 
+        b.Publisher_Name, 
+        shelf_no,  -- Extracted Shelf_No
+        row_no,    -- Extracted Row_No
+        branch_id  -- Derived BranchID
+    FROM Books_for_Sale b
+    WHERE b.ISBN = NEW.ISBN;
+
+    -- Log the action (optional, for audit purposes)
+    RAISE NOTICE 'Book % has been successfully moved from sale to rent in branch % with Shelf_No: %, Row_No: %, and price: %.', NEW.ISBN, branch_id, shelf_no, row_no, existing_price;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger for the Sale_to_Rent table
+CREATE or REPLACE TRIGGER trigger_handle_sale_to_rent
+AFTER INSERT ON Sale_to_Rent
+FOR EACH ROW
+EXECUTE FUNCTION handle_sale_to_rent();
+
+
 
 FUNCTIONS:
 
