@@ -1,268 +1,242 @@
--- we have 18 tables to create and insert date
-CREATE TABLE Authentication_System (
-    Email VARCHAR(50),
-    Passcode VARCHAR(20) NOT NULL,
-    CONSTRAINT pk_Authentication_System PRIMARY KEY (email),
-    CONSTRAINT chk_email CHECK (
-        email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
-    ),
-    CONSTRAINT chk_passcode CHECK (                                          
-        passcode ~ '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{1,}$'
-    )
-    --the passcode must contain at least one upper and lower case and 1 number and 1 symbol
-    --the email should follow the standard format
-);
-create table Customer (
-    Username VARCHAR(20),
-    Phone_Number VARCHAR(10) NOT NULL,
-    Address TEXT,
-    Sex CHAR(1) NOT NULL CHECK (Sex IN ('M', 'F')),
-    First_Name VARCHAR(20) NOT NULL,
-    Last_Name VARCHAR(20) NOT NULL,
-    Ct_Email VARCHAR(50) UNIQUE,
-    
-    CONSTRAINT pk_Customer PRIMARY KEY (Username),
-    CONSTRAINT fk_Customer FOREIGN KEY (Ct_Email) REFERENCES Authentication_System(Email)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL,
-    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~  '^[0-9]{2}/[0-9]{6}$' )
-    
-);
-create table Libraryy (
-    BranchID VARCHAR(10) NOT NULL,
-    Address TEXT NOT NULL,
-    Phone_Number VARCHAR(10) NOT NULL UNIQUE,
+CREATE TABLE Authentication_System ( 
+	Email VARCHAR(50), 
+	Passcode VARCHAR(20) NOT NULL, 
+	CONSTRAINT pk_Authentication_System PRIMARY KEY (email), 
+	CONSTRAINT chk_email CHECK ( 
+	email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$' 
+	), 
 
-    CONSTRAINT pk_Libraryy PRIMARY KEY (BranchID),
-    CONSTRAINT chk_BranchID CHECK (BranchID ~ '^LIBTECH[0-9]{2}$'),
-    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~ '^[0-9]{2}/[0-9]{6}$')
-);
-create table Staff (
-    SSN VARCHAR(11),
-    First_Name VARCHAR(20) NOT NULL,
-    Last_Name VARCHAR(20) NOT NULL,
-    DoB DATE,
-    Blood_Type CHAR(3) NOT NULL CHECK (Blood_Type IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')),
-    Address TEXT NOT NULL,
-    Salary NUMERIC CHECK (Salary > 0),
-    Post TEXT NOT NULL,
-    Super_SSN VARCHAR(11),
-    St_Email VARCHAR(50) UNIQUE,
-    BranchID VARCHAR(10),
-    Hours INTEGER CHECK (Hours >= 0),
-
-    CONSTRAINT pk_Staff PRIMARY KEY (SSN),
-    CONSTRAINT fk_Staff_St_Email FOREIGN KEY (St_Email) REFERENCES Authentication_System(Email)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL,
-    CONSTRAINT fk_Staff_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT fk_Staff_Super_SSN FOREIGN KEY (Super_SSN) REFERENCES Staff(SSN)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
-
-);
-create table Dependents (
-    SSN VARCHAR(11) NOT NULL,
-    Dep_Name VARCHAR(50) NOT NULL,
-    Relationship VARCHAR(20) NOT NULL,
-    Sex CHAR(1) NOT NULL CHECK (Sex IN ('M', 'F')),
-
-    CONSTRAINT pk_Dependents PRIMARY KEY (SSN, Dep_Name),
-    CONSTRAINT fk_Dependents FOREIGN KEY (SSN) REFERENCES Staff(SSN)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-
-);
-create table Supplier (
-    Supp_Name VARCHAR(50) NOT NULL UNIQUE,
-    Address TEXT NOT NULL,
-    Phone_Number VARCHAR(10) NOT NULL UNIQUE,
-    
-    CONSTRAINT pk_Supplier PRIMARY KEY (Supp_Name,Address),
-    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~ '^[0-9]{2}/[0-9]{6}$')
-);
-create table Publisher (
-    Publisher_Name VARCHAR(50) NOT NULL,
-    Address TEXT NOT NULL,
-    Phone_Number VARCHAR(10) NOT NULL UNIQUE,
-    
-    CONSTRAINT pk_Publisher PRIMARY KEY (Publisher_Name),
-    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~ '^[0-9]{2}/[0-9]{6}$')
-
-);
-
-create table Items (
-    Barcode VARCHAR(16) NOT NULL,
-    Items_Name VARCHAR(50) NOT NULL,
-    Age_Group VARCHAR(10),
-    Price NUMERIC NOT NULL CHECK (Price > 0),
-    Genre TEXT,
-    Supp_Name VARCHAR(50),
-    Supp_Address TEXT,
-    Qty_Supplied INTEGER NOT NULL CHECK (Qty_Supplied >= 0),
-    Date_Supplied DATE NOT NULL,
-
-    CONSTRAINT pk_Items PRIMARY KEY (Barcode),
-    CONSTRAINT fk_Items FOREIGN KEY (Supp_Name) REFERENCES Supplier(Supp_Name)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
-);
-
-CREATE TABLE Books_for_Sale (
-    ISBN CHAR(13) NOT NULL,  
-    Title TEXT NOT NULL,
-    Genre TEXT NOT NULL,
-    Price NUMERIC(10, 2) NOT NULL CHECK (Price > 0),  
-    -- NUMERIC(10,2) allows values ranging from -99999999.99 to 99999999.99
-    -- used for precise financial values to avoid rounding errors
-    Translator VARCHAR(50),
-    Edition INT NOT NULL CHECK (Edition > 0),  
-    Pages INT NOT NULL CHECK(Pages > 0) ,  
-    Lang VARCHAR(40) NOT NULL,
-    Publisher_Name VARCHAR(50),  
-    CONSTRAINT pk_Books_for_Sale PRIMARY KEY (ISBN),  
-    CONSTRAINT fk_Books_for_Sale FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Publisher_Name) 
+ 
+    CONSTRAINT chk_passcode CHECK (                                           
+        passcode ~ '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{1,}$' 
+    ) 
+    --the passcode must contain at least one upper and lower case and 1 number and 1 symbol 
+    --the email should follow the standard format 
+); 
+create table Customer ( 
+    Username VARCHAR(20), 
+    Phone_Number VARCHAR(10) NOT NULL, 
+    Address TEXT, 
+    Sex CHAR(1) NOT NULL CHECK (Sex IN ('M', 'F')), 
+    First_Name VARCHAR(20) NOT NULL, 
+    Last_Name VARCHAR(20) NOT NULL, 
+    Ct_Email VARCHAR(50) UNIQUE, 
+     
+    CONSTRAINT pk_Customer PRIMARY KEY (Username), 
+    CONSTRAINT fk_Customer FOREIGN KEY (Ct_Email) REFERENCES Authentication_System(Email),
+    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~  '^[0-9]{2}/[0-9]{6}$' ) 
+     
+); 
+create table Libraryy ( 
+    BranchID VARCHAR(10) NOT NULL, 
+    Address TEXT NOT NULL, 
+    Phone_Number VARCHAR(10) NOT NULL UNIQUE, 
+ 
+    CONSTRAINT pk_Libraryy PRIMARY KEY (BranchID), 
+    CONSTRAINT chk_BranchID CHECK (BranchID ~ '^LIBTECH[0-9]{2}$'), 
+    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~ '^[0-9]{2}/[0-9]{6}$') 
+); 
+create table Staff ( 
+    SSN VARCHAR(11), 
+    First_Name VARCHAR(20) NOT NULL, 
+    Last_Name VARCHAR(20) NOT NULL, 
+    DoB DATE, 
+    Blood_Type CHAR(3) NOT NULL CHECK (Blood_Type IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')), 
+    Address TEXT NOT NULL, 
+    Salary NUMERIC CHECK (Salary > 0), 
+    Post TEXT NOT NULL, 
+    Super_SSN VARCHAR(11), 
+    St_Email VARCHAR(50) UNIQUE, 
+    BranchID VARCHAR(10), 
+    Hours INTEGER CHECK (Hours >= 0), 
+ 
+    CONSTRAINT pk_Staff PRIMARY KEY (SSN), 
+    CONSTRAINT fk_Staff_St_Email FOREIGN KEY (St_Email) REFERENCES Authentication_System(Email), 
+    CONSTRAINT fk_Staff_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID),
+    CONSTRAINT fk_Staff_Super_SSN FOREIGN KEY (Super_SSN) REFERENCES Staff(SSN) 
+); 
+create table Dependents ( 
+    SSN VARCHAR(11) NOT NULL, 
+    Dep_Name VARCHAR(50) NOT NULL, 
+    Relationship VARCHAR(20) NOT NULL, 
+    Sex CHAR(1) NOT NULL CHECK (Sex IN ('M', 'F')), 
+ 
+    CONSTRAINT pk_Dependents PRIMARY KEY (SSN, Dep_Name), 
+ 
+    CONSTRAINT fk_Dependents FOREIGN KEY (SSN) REFERENCES Staff(SSN) 
         ON UPDATE CASCADE 
-        ON DELETE SET NULL  
-);
-
-CREATE TABLE Books_for_Rent (
-    BookID VARCHAR(17) NOT NULL,  --format (ISBN#ID)
-    ISBN CHAR(13) NOT NULL,  
-    Title TEXT NOT NULL,
-    Genre TEXT NOT NULL,
-    Price NUMERIC(10, 2) NOT NULL CHECK (Price > 0),  
-    Translator VARCHAR(50),
-    Edition INT NOT NULL CHECK (Edition > 0) ,  
-    Pages INT NOT NULL CHECK (Pages > 0),  
-    Lang VARCHAR(40) NOT NULL,
-    Publisher_Name VARCHAR(50),  
-    Shelf_No INT NOT NULL CHECK (Shelf_No > 0),  
-    Row_No INT NOT NULL CHECK (Row_No > 0),  
-    BranchID VARCHAR(10),  
-
-    CONSTRAINT pk_Books_for_Rent PRIMARY KEY (BookID),
-    CONSTRAINT fk_Books_for_Rent_Publisher_Name FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Publisher_Name) 
-        ON UPDATE CASCADE ON DELETE SET NULL,  
+        ON DELETE CASCADE 
+ 
+); 
+create table Supplier ( 
+    Supp_Name VARCHAR(50) NOT NULL UNIQUE, 
+    Address TEXT NOT NULL, 
+    Phone_Number VARCHAR(10) NOT NULL UNIQUE, 
+     
+    CONSTRAINT pk_Supplier PRIMARY KEY (Supp_Name,Address), 
+    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~ '^[0-9]{2}/[0-9]{6}$') 
+); 
+create table Publisher ( 
+    Publisher_Name VARCHAR(50) NOT NULL, 
+    Address TEXT NOT NULL, 
+    Phone_Number VARCHAR(10) NOT NULL UNIQUE, 
+     
+    CONSTRAINT pk_Publisher PRIMARY KEY (Publisher_Name), 
+    CONSTRAINT chk_Phone_Number CHECK (Phone_Number ~ '^[0-9]{2}/[0-9]{6}$') 
+ 
+); 
+ 
+create table Items ( 
+    Barcode VARCHAR(16) NOT NULL, 
+    Items_Name VARCHAR(50) NOT NULL, 
+    Age_Group VARCHAR(10), 
+    Price NUMERIC NOT NULL CHECK (Price > 0), 
+    Genre TEXT, 
+    Supp_Name VARCHAR(50), 
+    Supp_Address TEXT, 
+    Qty_Supplied INTEGER NOT NULL CHECK (Qty_Supplied >= 0), 
+    Date_Supplied DATE NOT NULL, 
+ 
+    CONSTRAINT pk_Items PRIMARY KEY (Barcode), 
+    CONSTRAINT fk_Items FOREIGN KEY (Supp_Name) REFERENCES Supplier(Supp_Name)  
+); 
+ 
+CREATE TABLE Books_for_Sale ( 
+    ISBN CHAR(13) NOT NULL,   
+    Title TEXT NOT NULL, 
+    Genre TEXT NOT NULL, 
+    Price NUMERIC(10, 2) NOT NULL CHECK (Price > 0),   
+    -- NUMERIC(10,2) allows values ranging from -99999999.99 to 99999999.99 
+    -- used for precise financial values to avoid rounding errors 
+    Translator VARCHAR(50), 
+    Edition INT NOT NULL CHECK (Edition > 0),   
+    Pages INT NOT NULL CHECK(Pages > 0) ,   
+    Lang VARCHAR(40) NOT NULL, 
+    Publisher_Name VARCHAR(50),   
+    CONSTRAINT pk_Books_for_Sale PRIMARY KEY (ISBN),   
+    CONSTRAINT fk_Books_for_Sale FOREIGN KEY (Publisher_Name) REFERENCES Publisher(Publisher_Name)   
+); 
+ 
+CREATE TABLE Books_for_Rent ( 
+    BookID VARCHAR(17) NOT NULL,  --format (ISBN#ID) 
+    ISBN CHAR(13) NOT NULL,   
+    Title TEXT NOT NULL, 
+    Genre TEXT NOT NULL, 
+    Price NUMERIC(10, 2) NOT NULL CHECK (Price > 0),   
+    Translator VARCHAR(50), 
+    Edition INT NOT NULL CHECK (Edition > 0) ,   
+    Pages INT NOT NULL CHECK (Pages > 0),   
+    Lang VARCHAR(40) NOT NULL, 
+    Publisher_Name VARCHAR(50),   
+    Shelf_No INT NOT NULL CHECK (Shelf_No > 0),   
+    Row_No INT NOT NULL CHECK (Row_No > 0),   
+    BranchID VARCHAR(10),   
+ 
+    CONSTRAINT pk_Books_for_Rent PRIMARY KEY (BookID), 
+    CONSTRAINT fk_Books_for_Rent_Publisher_Name FOREIGN KEY (Publisher_Name) REFERENCES 
+	Publisher(Publisher_Name),  
     CONSTRAINT fk_Books_for_Rent_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID) 
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-
-CREATE TABLE Authors_BookSale (
-    ISBN CHAR(13) NOT NULL,  
+); 
+ 
+ 
+CREATE TABLE Authors_BookSale ( 
+    ISBN CHAR(13) NOT NULL,   
+    Author_Name VARCHAR(50) NOT NULL,   
+ 
+    CONSTRAINT pk_Authors_BookSale PRIMARY KEY (ISBN, Author_Name), 
+ 
+    CONSTRAINT fk_Authors_BookSale FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN)  
+); 
+ 
+CREATE TABLE Authors_BookRent ( 
+    BookID VARCHAR(17) NOT NULL,   
     Author_Name VARCHAR(50) NOT NULL,  
-
-    CONSTRAINT pk_Authors_BookSale PRIMARY KEY (ISBN, Author_Name),
-
-    CONSTRAINT fk_Authors_BookSale FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN) 
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE Authors_BookRent (
-    BookID VARCHAR(17) NOT NULL,  
-    Author_Name VARCHAR(50) NOT NULL, 
-
-    CONSTRAINT pk_Authors_BookRent PRIMARY KEY (BookID, Author_Name),
-
-    CONSTRAINT fk_Authors_BookRent FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID) 
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-
-CREATE TABLE Stores_Items (
-    BranchID VARCHAR(10) NOT NULL,  
-    Barcode VARCHAR(16) NOT NULL,  
-    Qty_Stored INT NOT NULL CHECK (Qty_Stored >= 0),  
-
-    CONSTRAINT pk_Stores_Items PRIMARY KEY (BranchID, Barcode),
-
-    CONSTRAINT fk_Stores_Items FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID)
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-
-create table Stores_Booksforsale (
-    BranchID VARCHAR(10) NOT NULL,  
-    ISBN CHAR(13) NOT NULL,  
-    Number_of_Copies INT NOT NULL CHECK (Number_of_Copies >= 0),  
-
-    CONSTRAINT pk_Stores_Booksforsale PRIMARY KEY (BranchID, ISBN),
-
-    CONSTRAINT fk_Stores_Booksforsale_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-
+ 
+    CONSTRAINT pk_Authors_BookRent PRIMARY KEY (BookID, Author_Name), 
+ 
+ 
+    CONSTRAINT fk_Authors_BookRent FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID)
+); 
+ 
+ 
+CREATE TABLE Stores_Items ( 
+    BranchID VARCHAR(10) NOT NULL,   
+    Barcode VARCHAR(16) NOT NULL,   
+    Qty_Stored INT NOT NULL CHECK (Qty_Stored >= 0),   
+ 
+    CONSTRAINT pk_Stores_Items PRIMARY KEY (BranchID, Barcode), 
+ 
+    CONSTRAINT fk_Stores_Items FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID) 
+); 
+ 
+ 
+create table Stores_Booksforsale ( 
+    BranchID VARCHAR(10) NOT NULL,   
+    ISBN CHAR(13) NOT NULL,   
+    Number_of_Copies INT NOT NULL CHECK (Number_of_Copies >= 0),   
+ 
+    CONSTRAINT pk_Stores_Booksforsale PRIMARY KEY (BranchID, ISBN), 
+ 
+    CONSTRAINT fk_Stores_Booksforsale_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID),
+ 
     CONSTRAINT fk_Stores_Booksforsale_ISBN FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN)
-        ON UPDATE CASCADE ON DELETE CASCADE
-
-);
-create table Buys_Books (
-    Username VARCHAR(20) NOT NULL,  
-    BranchID VARCHAR(10) NOT NULL,  
-    ISBN CHAR(13) NOT NULL,  
-    Quantity INT NOT NULL CHECK (Quantity >= 0),  
-    Date_Time TIMESTAMP NOT NULL,  
-
-    CONSTRAINT pk_Buys_Books PRIMARY KEY (Username, BranchID, ISBN, Date_Time),
-
-    CONSTRAINT fk_Buys_Books_Customer FOREIGN KEY (Username) REFERENCES Customer(Username)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-
-    CONSTRAINT fk_Buys_Books_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-
-    CONSTRAINT fk_Buys_Books_ISBN FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN)
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-create table Purchases_Items (
-    Username VARCHAR(20) NOT NULL,  
-    BranchID VARCHAR(10) NOT NULL,  
-    Barcode VARCHAR(16) NOT NULL,  
-    Quantity INT NOT NULL CHECK (Quantity >= 0),  
-    Date_Time TIMESTAMP NOT NULL,  
-
-    CONSTRAINT pk_Purchases_Items PRIMARY KEY (Username, BranchID, Barcode, Date_Time),
-
-    CONSTRAINT fk_Purchases_Items_Username FOREIGN KEY (Username) REFERENCES Customer(Username)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-
-    CONSTRAINT fk_Purchases_Items_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-
-    CONSTRAINT fk_Purchases_Items_Barcode FOREIGN KEY (Barcode) REFERENCES Items(Barcode)
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-create table Borrows (
-    Username VARCHAR(20) NOT NULL,  
-    BookID VARCHAR(17) NOT NULL,  
-    Date_Out DATE NOT NULL,  
-    Due_Date DATE NOT NULL,  
-    Penalty DECIMAL(10, 2) DEFAULT 0 CHECK (Penalty >= 0),  
-
-    CONSTRAINT pk_Borrows PRIMARY KEY (Username, BookID, Due_Date, Date_Out),
-
-    CONSTRAINT fk_Borrows_Username FOREIGN KEY (Username) REFERENCES Customer(Username)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-
-    CONSTRAINT fk_Borrows_BookID FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID)
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-create table Sale_to_Rent (
-    
-    BookID VARCHAR(17) NOT NULL,  
-    ISBN CHAR(13) NOT NULL,  
-    Date_Moved DATE NOT NULL,  
-    Discount DECIMAL(5, 2) DEFAULT 0 CHECK (Discount >= 0 AND Discount <= 100),   --discount is %
-
-    CONSTRAINT pk_Sale_to_Rent PRIMARY KEY (BookID,ISBN),
-
-    CONSTRAINT fk_Sale_to_Rent_BookID FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-
-    CONSTRAINT fk_Sale_to_Rent_ISBN FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN)
-        ON UPDATE CASCADE ON DELETE CASCADE
-
-);
+ 
+); 
+ 
+create table Buys_Books ( 
+    Username VARCHAR(20) NOT NULL,   
+    BranchID VARCHAR(10) NOT NULL,   
+    ISBN CHAR(13) NOT NULL,   
+    Quantity INT NOT NULL CHECK (Quantity >= 0),   
+    Date_Time TIMESTAMP NOT NULL,   
+ 
+    CONSTRAINT pk_Buys_Books PRIMARY KEY (Username, BranchID, ISBN, Date_Time), 
+ 
+    CONSTRAINT fk_Buys_Books_Customer FOREIGN KEY (Username) REFERENCES Customer(Username),
+ 
+    CONSTRAINT fk_Buys_Books_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID), 
+ 
+    CONSTRAINT fk_Buys_Books_ISBN FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN) 
+); 
+ 
+create table Purchases_Items ( 
+    Username VARCHAR(20) NOT NULL,   
+    BranchID VARCHAR(10) NOT NULL,   
+    Barcode VARCHAR(16) NOT NULL,   
+    Quantity INT NOT NULL CHECK (Quantity >= 0),   
+    Date_Time TIMESTAMP NOT NULL,   
+ 
+    CONSTRAINT pk_Purchases_Items PRIMARY KEY (Username, BranchID, Barcode, Date_Time), 
+ 
+    CONSTRAINT fk_Purchases_Items_Username FOREIGN KEY (Username) REFERENCES Customer(Username),
+ 
+    CONSTRAINT fk_Purchases_Items_BranchID FOREIGN KEY (BranchID) REFERENCES Libraryy(BranchID), 
+ 
+    CONSTRAINT fk_Purchases_Items_Barcode FOREIGN KEY (Barcode) REFERENCES Items(Barcode) 
+); 
+create table Borrows ( 
+    Username VARCHAR(20) NOT NULL,   
+    BookID VARCHAR(17) NOT NULL,   
+    Date_Out DATE NOT NULL,   
+    Due_Date DATE NOT NULL,   
+    Penalty DECIMAL(10, 2) DEFAULT 0 CHECK (Penalty >= 0),   
+ 
+    CONSTRAINT pk_Borrows PRIMARY KEY (Username, BookID, Due_Date), 
+ 
+    CONSTRAINT fk_Borrows_Username FOREIGN KEY (Username) REFERENCES Customer(Username) ,
+ 
+    CONSTRAINT fk_Borrows_BookID FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID) 
+); 
+create table Sale_to_Rent ( 
+     
+    BookID VARCHAR(17) NOT NULL,   
+    ISBN CHAR(13) NOT NULL,   
+    Date_Moved DATE NOT NULL,   
+    Discount DECIMAL(5, 2) DEFAULT 0 CHECK (Discount >= 0 AND Discount <= 100),   --discount is % 
+ 
+    CONSTRAINT pk_Sale_to_Rent PRIMARY KEY (BookID,ISBN), 
+ 
+    CONSTRAINT fk_Sale_to_Rent_BookID FOREIGN KEY (BookID) REFERENCES Books_for_Rent(BookID),
+ 
+	CONSTRAINT fk_Sale_to_Rent_ISBN FOREIGN KEY (ISBN) REFERENCES Books_for_Sale(ISBN) 
+); 
