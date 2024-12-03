@@ -175,7 +175,7 @@ $$ LANGUAGE plpgsql;
 
 -- Trigger for the Sale_to_Rent table
 CREATE or REPLACE TRIGGER trigger_handle_sale_to_rent
-AFTER INSERT ON Sale_to_Rent
+BEFORE INSERT ON Sale_to_Rent
 FOR EACH ROW
 EXECUTE FUNCTION handle_sale_to_rent();
 
