@@ -122,14 +122,15 @@ Security Mechanism 4: Encryption and Decryption
 CREATE EXTENSION pgcrypto;
 ALTER TABLE Authentication_System DROP CONSTRAINT chk_passcode;
 ALTER TABLE Authentication_System
-ALTER COLUMN Passcode TYPE BYTEA USING encode(Passcode, 'base64')::BYTEA;
+ALTER COLUMN Passcode TYPE BYTEA USING pgp_sym_encrypt(Passcode::TEXT, 's3cUr3!kEy#2023@P0stgreSQL^');
+
 
 Encryption:
-Insert into Authentication_System Values('myh17@gmail.com',pgp_sym_encrypt('Qwerty123#@', 'encryption_key'));
+Insert into Authentication_System Values('myh17@gmail.com',pgp_sym_encrypt('Qwerty123#@', 's3cUr3!kEy#2023@P0stgreSQL^'));
 
 Decryption:
 SELECT Email,
-       pgp_sym_decrypt(Passcode, 'encryption_key') AS Decrypted_Passcode
+       pgp_sym_decrypt(Passcode::TEXT, 's3cUr3!kEy#2023@P0stgreSQL^') AS Decrypted_Passcode
 FROM Authentication_System
 WHERE Email = 'myh17@gmail.com';
 
