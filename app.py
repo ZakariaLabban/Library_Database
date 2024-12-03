@@ -22,9 +22,9 @@ st.set_page_config(page_title="📚 LibTech Database", layout="wide")
 
 DB_HOST = "127.0.0.1"
 DB_PORT = "5432"
-DB_NAME = "Streamlit"
-DB_USER = "postgres"
-DB_PASSWORD = "M@youch21"
+DB_NAME = "xxx"
+DB_USER = "xxx"
+DB_PASSWORD = "xxx"
 ENCRYPTION_KEY = "s3cUr3!kEy#2023@P0stgreSQL^"
 
 @st.cache_resource
