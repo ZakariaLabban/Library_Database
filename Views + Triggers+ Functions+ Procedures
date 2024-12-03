@@ -75,7 +75,7 @@ BEGIN
         FROM Borrows
         WHERE Username = NEW.Username 
         AND Due_Date < CURRENT_DATE      -- Check if due date has passed
-        AND Status = 'Borrowed
+        AND Status = 'Borrowed'
     ) THEN
         RAISE EXCEPTION 'User % has overdue books and cannot borrow a new book', NEW.Username;
     END IF;
