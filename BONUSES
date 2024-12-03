@@ -130,7 +130,7 @@ Insert into Authentication_System Values('myh17@gmail.com',pgp_sym_encrypt('Qwer
 
 Decryption:
 SELECT Email,
-       pgp_sym_decrypt(Passcode::TEXT, 's3cUr3!kEy#2023@P0stgreSQL^') AS Decrypted_Passcode
+       pgp_sym_decrypt(Passcode, 's3cUr3!kEy#2023@P0stgreSQL^') AS Decrypted_Passcode
 FROM Authentication_System
 WHERE Email = 'myh17@gmail.com';
 
