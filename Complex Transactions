@@ -12,7 +12,7 @@ LIMIT 5;
 
 Q2: List Customers Who Have Unreturned Books Past Due Date
 Code:
-SELECT c.Username, c.First_Name, c.Last_Name, b.BookID, br.Title, b.Due_Date, b.Penalty
+SELECT c.Username, c.First_Name, c.Last_Name, b.BookID, br.Title, b.Due_Date, b.Penalty,
        (b.Penalty + (CURRENT_DATE - b.Due_Date) * 0.5) AS Fine_Amount
 FROM Borrows b
 JOIN Customer c ON b.Username = c.Username
@@ -74,7 +74,7 @@ SELECT
     Username, 
     CASE 
         WHEN Total_Spending > 500 THEN 'High Spender'
-        WHEN Total_Spending BETWEEN (200,500) THEN 'Medium Spender'
+        WHEN Total_Spending BETWEEN 200 AND 500 THEN 'Medium Spender'
         ELSE 'Low Spender'
     END AS Customer_Segment
 FROM 
