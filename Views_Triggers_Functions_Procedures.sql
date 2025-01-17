@@ -1,7 +1,7 @@
-VIEWS:
+--VIEWS:
 
-View 1: This view provides a summary of items supplied by each supplier along with the total quantity supplied
-Code: 
+--View 1: This view provides a summary of items supplied by each supplier along with the total quantity supplied
+ 
 CREATE VIEW Supplier_Supply_Summary AS
 SELECT 
     s.Supp_Name, 
@@ -16,8 +16,8 @@ GROUP BY
 ORDER BY 
     s.Supp_Name;
 
-View2: --Customers With Outstanding Penalties
-Code:
+--View2: Customers With Outstanding Penalties
+
 CREATE VIEW Customers_With_Penalties AS
 SELECT 
     c.Username, 
@@ -37,10 +37,10 @@ ORDER BY
 Test Case:
 SELECT * FROM Customers_With_Penalties;
 
-Triggers:
+--Triggers:
 
-Trigger1: Automatically Update the Quantity of Books for Sale After a Purchase
-Code:
+--Trigger1: Automatically Update the Quantity of Books for Sale After a Purchase
+
 CREATE OR REPLACE FUNCTION update_book_stock()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -64,8 +64,8 @@ AFTER INSERT ON Buys_Books
 FOR EACH ROW
 EXECUTE FUNCTION update_book_stock();
 
-Trigger2: --Prevent a user from borrowing a new book if they have outstanding penalties in the Borrows table.
-Code:
+--Trigger2: Prevent a user from borrowing a new book if they have outstanding penalties in the Borrows table.
+
 CREATE OR REPLACE FUNCTION prevent_borrow_with_overdue()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -90,7 +90,6 @@ BEFORE INSERT ON Borrows
 FOR EACH ROW
 EXECUTE FUNCTION prevent_borrow_with_overdue();
 
-MIX PRO MAX BY ZAKARIA BILAL LABBAN:
 
 CREATE OR REPLACE FUNCTION handle_sale_to_rent()
 RETURNS TRIGGER AS $$
@@ -181,10 +180,10 @@ EXECUTE FUNCTION handle_sale_to_rent();
 
 
 
-FUNCTIONS:
+--FUNCTIONS:
 
-Function1: This function checks whether a specific book (based on its Name) is available in a given branch and returns the number of copies available.
-Code:
+--Function1: This function checks whether a specific book (based on its Name) is available in a given branch and returns the number of copies available.
+
 CREATE OR REPLACE FUNCTION check_book_availability(Title_input TEXT, branch_id_input VARCHAR)
 RETURNS TEXT AS $$
 DECLARE
@@ -204,11 +203,11 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-Example usage:
+--Example usage:
 SELECT check_book_availability('Electronics', 'LIBTECH01');
 
-Function2: --Calculate Total Inventory Value for a Branch
-Code:
+--Function2: Calculate Total Inventory Value for a Branch
+
 CREATE OR REPLACE FUNCTION total_inventory_value(branch_id VARCHAR)
 RETURNS NUMERIC AS $$
 DECLARE
@@ -236,8 +235,8 @@ $$ LANGUAGE plpgsql;
 
 
 
-Stored Procedure1: Transfer Book Stock Between Branches
-Code:
+--Stored Procedure1: Transfer Book Stock Between Branches
+
 CREATE OR REPLACE PROCEDURE transfer_book_stock(
     from_branch VARCHAR,
     to_branch VARCHAR,
@@ -270,7 +269,7 @@ END;
 $$;
 
 
-example: CALL transfer_book_stock('LIBTECH01', 'LIBTECH02', '0000000003421', 5);
+--example: CALL transfer_book_stock('LIBTECH01', 'LIBTECH02', '0000000003421', 5);
 
 
 
